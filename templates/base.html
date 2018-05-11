@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% if title %}
+		<title>>CAKE Visualisation Project - {{ title }}</title>
+		{% else %}
+		<title>>CAKE Visualisation Project - Home</title>
+		{% endif %}
+
+		<!--Bulma/FontAwesome pre-created stylesheets-->
+		<link rel="stylesheet" href={{ url_for('static', filename='css/fontawesome.min.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='css/bulma.css') }}>
+        <link rel="script" href="https://cdn.plot.ly/plotly-latest.min.js">
+
+    </head>
+
+    	<body>
+		<nav class="navbar is-info is-bold" role="navigation" aria-label="main navigation">
+  			<div class="navbar-brand">
+   				<a class="navbar-item" href="/">
+      				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/BBC.svg/800px-BBC.svg.png" alt="Home" width="112" height="28">
+   				</a>
+    			</div>
+		</nav>
+
+		<section class="hero is-dark is-bold">
+			<div class="container">
+				<br>
+	    			<h1 align="center", class="title is-1">CAKE Visualisation Project</h1>
+				{% if title %}
+				<h3 align="center", class="title is-4">{{ title }}</h3>
+				{% else %}
+				<h3 align="center", class="title is-4">App Web Interface</h3>
+				{% endif %}
+			</div>
+			<div class="hero-foot">
+    				<nav class="tabs">
+      					<div class="container">
+					</div>
+					<div class="container">
+          						<li class="is-active">
+							<br>
+							<li><p><a href="/">Home</a></p></li>
+							<li><p><a href="About">About</a><p><li>
+							</li>
+					</div>
+					<div class="container">
+					</div>
+				</nav>
+			</div>
+			<br>
+		</section>
+
+
+		<br>
+		<br>
+
+		{% block content %}{% endblock %}
+
+   	</body>
+
+</html>
