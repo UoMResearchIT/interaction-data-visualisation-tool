@@ -1,4 +1,4 @@
 .idea
-static/input/
+/input
 venv
 __pycache__
