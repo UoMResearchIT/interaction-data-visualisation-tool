@@ -2,7 +2,7 @@ import plotly.offline as offline
 import pandas as pd
 import plotly.graph_objs as go
 
-import os
+from flask import render_template
 
 upload_folder = 'static/output/'
 
@@ -37,5 +37,8 @@ layout = go.Layout(
 
 path = 'static\output\plots'
 
-offline.plot({'data': data, 'layout': layout}, validate=False, filename='static\output\plots\\action_item.html')
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\plots\\action_item.html',
+             auto_open=False)
 
+# action_item_plot = offline.plot({'data': data, 'layout': layout},  show_link=False, output_type="div",
+#                                 include_plotlyjs=False)
