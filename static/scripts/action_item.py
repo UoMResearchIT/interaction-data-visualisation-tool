@@ -35,4 +35,7 @@ layout = go.Layout(
     ),
 )
 
-div = offline.plot({'data': data, 'layout': layout}, validate=False, filename='action_item.html')
+path = 'static\output\plots'
+
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='static\output\plots\\action_item.html')
+
