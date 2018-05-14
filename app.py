@@ -37,9 +37,15 @@ def upload_file():
     return render_template('index.html')
 
 
-@app.route('/vrun')
-def run_script():
+@app.route('/click')
+def run_click():
     os.system("python static/scripts/action_item.py")
+    return render_template('vrun.html')
+
+
+@app.route('/stats')
+def run_stats():
+    os.system("python static/scripts/create_stats.py")
     return render_template('vrun.html')
 
 
