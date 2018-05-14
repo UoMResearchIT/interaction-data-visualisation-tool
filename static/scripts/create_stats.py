@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 
+import os.path
+
 # Read BBC Data
-bbc_data = pd.read_csv('../../data/bbc_data_session_id_condition.csv')
+bbc_data = pd.read_csv('static/input/bbc_data_session_id_condition.csv')
 
 bbc_data = bbc_data.drop('participant_session_id', 1)
 
@@ -72,4 +74,7 @@ bbc_data_sorted = pd.DataFrame(
 bbc_data_sorted = bbc_data_sorted[['participant_id', 'condition', 'click_count', 'time_taken_secs',
                                    'time_taken_mins', 'clicks_per_second', 'seconds_per_click', 'clicks_per_minute', 'minutes_per_click', ]]
 
-bbc_data_sorted.to_csv('bbc_data_click_stats_technical', encoding='utf-8', index=False)
+path = 'static\output\stats'
+
+bbc_data_sorted.to_csv(os.path.join(path, r'bbc_data_stats.csv'))
+
