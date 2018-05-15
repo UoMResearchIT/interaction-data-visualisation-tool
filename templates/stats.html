@@ -1,0 +1,18 @@
+{% extends "Base.html" %}
+
+{% block content %}
+
+	<h3 align="center">COMPLETE!</h3>
+
+	<br>
+
+    <p align="center" style="margin: 10px"><a href="/dl_stats_csv"><button type="button">Download Stats as CSV</button></a></p>
+    <p align="center" style="margin-bottom: 10px"><a href="/dl_stats_html"><button type="button">Download Stats as HTML</button></a></p>
+
+    <br>
+
+    {% include 'bbc_data_stats.html' %}
+
+
+{% endblock content %}
+
