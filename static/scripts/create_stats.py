@@ -74,7 +74,11 @@ bbc_data_sorted = pd.DataFrame(
 bbc_data_sorted = bbc_data_sorted[['participant_id', 'condition', 'click_count', 'time_taken_secs',
                                    'time_taken_mins', 'clicks_per_second', 'seconds_per_click', 'clicks_per_minute', 'minutes_per_click', ]]
 
-path = 'static\output\stats'
+csv_path = 'static\output\stats'
+html_path = 'templates'
 
-bbc_data_sorted.to_csv(os.path.join(path, r'bbc_data_stats.csv'))
+bbc_data_sorted.to_csv(os.path.join(csv_path, r'bbc_data_stats.csv'))
+
+bbc_data_sorted.to_html(os.path.join(html_path, r'bbc_data_stats.html'))
+
 
