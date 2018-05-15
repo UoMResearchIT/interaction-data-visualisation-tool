@@ -1,9 +1,6 @@
-from flask import Flask
-from flask import render_template
 import os
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, send_file, render_template
 from werkzeug.utils import secure_filename
-from flask import send_from_directory
 
 UPLOAD_FOLDER = 'static/input/'
 ALLOWED_EXTENSIONS = set(['csv'])
@@ -43,10 +40,34 @@ def run_click():
     return render_template('click.html')
 
 
+@app.route('/dl_click')
+def run_dl_click():
+    return send_file('templates\\action_item.html',
+                     mimetype='text/html',
+                     attachment_filename='bbc_data_action_item.html',
+                     as_attachment=True)
+
+
 @app.route('/stats')
 def run_stats():
     os.system("python static/scripts/create_stats.py")
     return render_template('stats.html')
+
+
+@app.route('/dl_stats_csv')
+def run_dl_stats_csv():
+    return send_file('static\output\\stats\\bbc_data_stats.csv',
+                     mimetype='text/csv',
+                     attachment_filename='bbc_data_stats.csv',
+                     as_attachment=True)
+
+
+@app.route('/dl_stats_html')
+def run_dl_stats_html():
+    return send_file('templates\\bbc_data_stats.html',
+                     mimetype='text/html',
+                     attachment_filename='bbc_data_stats.html',
+                     as_attachment=True)
 
 
 if __name__ == '__main__':
