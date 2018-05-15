@@ -39,6 +39,3 @@ path = 'static\output\plots'
 
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
              auto_open=False)
-
-# action_item_plot = offline.plot({'data': data, 'layout': layout},  show_link=False, output_type="div",
-#                                 include_plotlyjs=False)
