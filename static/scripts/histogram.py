@@ -6,39 +6,23 @@ import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
 
-# Markdown Text that gives brief explanation of plot
-markdown_text = '''
-### CAKE and LINEAR Stats Histograms
+import os.path
 
-Creates Histograms based on the stats taken from each participant session. 
-Choose the stats you want to see, and bin size. 
-
-Participant sessions are split by those who had Technical Difficulties, and those hwo didn't. 
-'''
-
-app = dash.Dash()
+dash_app = dash.Dash()
 
 # Load external CSS
-app.css.append_css({"external_url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"})
+dash_app.css.append_css({"external_url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"})
 
 # read CAKE and NON CAKE dataData
-df = bbc_data_sorted
+df = pd.read_csv('static/output/stats/bbc_data_stats.csv')
 
 # Get column names to use in dropdown
 available_indicators = list(df.columns.values)
 
 # Layout of Dash App
-app.layout = html.Div([
+dash_app.layout = html.Div([
 
     html.Div([
-
-        # Markdown text
-        html.Div(
-            dcc.Markdown(id='graph-description',
-                         children=markdown_text, ),
-            style={
-            }
-        ),
 
         # Interval Number Input
         html.Div([
@@ -78,7 +62,7 @@ app.layout = html.Div([
 
 
 # CAKE
-@app.callback(
+@dash_app.callback(
     # Output
     dash.dependencies.Output('cake', 'figure'),
     # Input
@@ -97,15 +81,8 @@ def update_graph(x_axis, bin_size):
                              autobinx=False,
                              xbins=bins
                              )
-
-    trace_tech_diff = go.Histogram(x=dff[x_axis],
-                                   opacity=0.75,
-                                   name='Technical Difficulties',
-                                   autobinx=False,
-                                   xbins=bins
-                                   )
     return {
-        'data': [trace_all, trace_tech_diff],
+        'data': [trace_all],
         'layout' : go.Layout(
             title='Histogram of' + ' ' + x_axis + ' in CAKE',
             xaxis=dict(
@@ -122,4 +99,4 @@ def update_graph(x_axis, bin_size):
 
 
 if __name__ == '__main__':
-    app.run_server()
+    dash_app.run_server(host='0.0.0.0/histogram_dash_app', debug=True)
