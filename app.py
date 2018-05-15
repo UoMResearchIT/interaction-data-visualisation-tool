@@ -34,23 +34,39 @@ def upload_file():
     return render_template('index.html')
 
 
+#  CLICK - Run scripts to get click type and density plots
+
 @app.route('/click')
 def run_click():
     os.system("python static/scripts/action_item.py")
+    os.system("python static/scripts/click_density.py")
     return render_template('click.html')
 
 
 @app.route('/dl_click')
 def run_dl_click():
-    return send_file('templates\\action_item.html',
+    return send_file('templates\\bbc_data_action_item.html',
                      mimetype='text/html',
                      attachment_filename='bbc_data_action_item.html',
                      as_attachment=True)
 
 
+@app.route('/dl_click_density')
+def run_dl_click_density():
+    return send_file('templates\\bbc_data_click_density.html',
+                     mimetype='text/html',
+                     attachment_filename='bbc_data_click_density.html',
+                     as_attachment=True)
+
+
+#  STATS = Run scripts to get stats and histograms
+
 @app.route('/stats')
 def run_stats():
     os.system("python static/scripts/create_stats.py")
+    os.system("python static/scripts/histogram_click_count.py")
+    os.system("python static/scripts/histogram_clicks_per_min.py")
+    os.system("python static/scripts/histogram_time_taken.py")
     return render_template('stats.html')
 
 
