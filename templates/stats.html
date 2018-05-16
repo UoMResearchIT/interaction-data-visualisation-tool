@@ -6,19 +6,61 @@
 
 	<br>
 
-    {% include 'bbc_data_histogram_click_count.html' %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Click Count</h1>
 
-    {% include 'bbc_data_histogram_clicks_per_minute.html' %}
+            {% include 'bbc_data_histogram_click_count.html' %}
 
-    {% include 'bbc_data_histogram_time_taken_mins.html' %}
+            <p align="center" style="margin-bottom: 10px"><a href="/dl_click_count_html"><button type="button">Download as HTML</button></a></p>
 
-
-    <p align="center" style="margin: 10px"><a href="/dl_stats_csv"><button type="button">Download Stats as CSV</button></a></p>
-    <p align="center" style="margin-bottom: 10px"><a href="/dl_stats_html"><button type="button">Download Stats as HTML</button></a></p>
+        </div>
+    </section>
 
     <br>
 
+     <section class="section">
+        <div class="container">
+            <h1 class="title">Clicks Per Minute</h1>
+
+            {% include 'bbc_data_histogram_clicks_per_minute.html' %}
+
+            <p align="center" style="margin-bottom: 10px"><a href="/dl_clicks_per_minute_html"><button type="button">Download as HTML</button></a></p>
+
+       </div>
+    </section>
+
+    <br>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Time Taken (in mins)</h1>
+
+            {% include 'bbc_data_histogram_time_taken_mins.html' %}
+
+            <p align="center" style="margin-bottom: 10px"><a href="/dl_time_taken_html"><button type="button">Download as HTML</button></a></p>
+        </div>
+    </section>
+
+    <br>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Table of Stats</h1>
+    <br>
+
+    <p><a href="/dl_stats_csv"><button type="button">Download Stats as CSV</button></a></p>
+
+    <br>
+    <br>
+
+
     {% include 'bbc_data_stats.html' %}
+
+    <br>
+
+       </div>
+    </section>
 
 
 {% endblock content %}
