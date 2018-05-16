@@ -38,6 +38,8 @@ def upload_file():
 
 @app.route('/click')
 def run_click():
+    # Get variable for filename via POST and/or GET
+    # put it in as system argument ie python arg1(script_name) arg2(filename)
     os.system("python static/scripts/action_item.py")
     os.system("python static/scripts/click_density.py")
     return render_template('click.html')
