@@ -70,19 +70,35 @@ def run_stats():
     return render_template('stats.html')
 
 
+@app.route('/dl_click_count_html')
+def run_dl_click_count():
+    return send_file('templates\\bbc_data_histogram_click_count.html',
+                     mimetype='text/csv',
+                     attachment_filename='bbc_data_histogram_click_count.html',
+                     as_attachment=True)
+
+
+@app.route('/dl_clicks_per_minute_html')
+def run_dl_clicks_per_minute():
+    return send_file('templates\\bbc_data_histogram_clicks_per_minute.html',
+                     mimetype='text/csv',
+                     attachment_filename='bbc_data_histogram_clicks_per_minute.html',
+                     as_attachment=True)
+
+
+@app.route('/dl_time_taken_html')
+def run_dl_time_taken():
+    return send_file('templates\\bbc_data_histogram_time_taken_mins.html',
+                     mimetype='text/csv',
+                     attachment_filename='bbc_data_histogram_time_taken_mins.html',
+                     as_attachment=True)
+
+
 @app.route('/dl_stats_csv')
 def run_dl_stats_csv():
     return send_file('static\output\\stats\\bbc_data_stats.csv',
                      mimetype='text/csv',
                      attachment_filename='bbc_data_stats.csv',
-                     as_attachment=True)
-
-
-@app.route('/dl_stats_html')
-def run_dl_stats_html():
-    return send_file('templates\\bbc_data_stats.html',
-                     mimetype='text/html',
-                     attachment_filename='bbc_data_stats.html',
                      as_attachment=True)
 
 
