@@ -1,6 +1,3 @@
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
 import plotly.offline as offline
 import plotly.graph_objs as go
 
@@ -8,8 +5,10 @@ import pandas as pd
 import numpy as np
 import math
 
+import sys
+
 # reads csv
-bbc_data = pd.read_csv('static/input/bbc_data_session_id_condition.csv')
+bbc_data = pd.read_csv(sys.argv[1])
 
 # replace all null values
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")

@@ -1,12 +1,13 @@
 import plotly.offline as offline
 import pandas as pd
 import plotly.graph_objs as go
+import sys
 
 from flask import render_template
 
 upload_folder = 'static/output/'
 
-bbc_data = pd.read_csv('static/input/bbc_data_session_id_condition.csv')
+bbc_data = pd.read_csv(sys.argv[1])
 
 time_diff = bbc_data['time_diff'] / 60
 participant_id = bbc_data['participant_id']
