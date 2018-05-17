@@ -1,6 +1,7 @@
 import os
-from flask import Flask, request, redirect, url_for, send_file, render_template
+from flask import Flask, request, redirect, url_for, send_file, render_template, session
 from werkzeug.utils import secure_filename
+
 
 UPLOAD_FOLDER = 'static/input/'
 ALLOWED_EXTENSIONS = set(['csv'])
@@ -30,18 +31,24 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('vrun'))
+            return redirect(url_for('run_click', filename=filename))
     return render_template('index.html')
 
 
 #  CLICK - Run scripts to get click type and density plots
 
-@app.route('/click')
+@app.route('/click', methods=['GET'])
 def run_click():
     # Get variable for filename via POST and/or GET
     # put it in as system argument ie python arg1(script_name) arg2(filename)
-    os.system("python static/scripts/action_item.py")
-    os.system("python static/scripts/click_density.py")
+
+    # file_name = request.args['file']
+    file_name = str(request.args.get('filename'))
+
+    file_path = 'static/input/' + file_name
+
+    os.system("python static/scripts/action_item.py " + file_path)
+    os.system("python static/scripts/click_density.py " + file_path)
     return render_template('click.html')
 
 
