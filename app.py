@@ -60,6 +60,12 @@ def run_dl_click():
                      as_attachment=True)
 
 
+@app.route('/dl_click_svg')
+def run_dl_click_svg():
+    os.system("python static/scripts/action_item_svg.py ")
+    return
+
+
 @app.route('/dl_click_density')
 def run_dl_click_density():
     return send_file('templates\\bbc_data_click_density.html',
@@ -112,4 +118,5 @@ def run_dl_stats_csv():
 
 
 if __name__ == '__main__':
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run()
