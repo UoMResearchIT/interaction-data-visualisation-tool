@@ -5,16 +5,16 @@ import sys
 
 from flask import render_template
 
-upload_folder = 'static/output/'
+target_file = sys.argv[1]
 
-bbc_data = pd.read_csv(sys.argv[1])
+bbc_data = pd.read_csv(target_file)
 
 time_diff = bbc_data['time_diff'] / 60
 participant_id = bbc_data['participant_id']
 action_item = bbc_data['action_item']
 
 data = [dict(
-    type='scatter',
+    type='scattergl',
     x=time_diff,
     y=participant_id,
     mode='markers',
@@ -38,5 +38,8 @@ layout = go.Layout(
 
 path = 'static\output\plots'
 
+# offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
+#              auto_open=False)
+
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
-             auto_open=False)
+             auto_open=False, image='svg')
