@@ -7,8 +7,10 @@ import math
 
 import sys
 
-# reads csv
-bbc_data = pd.read_csv(sys.argv[1])
+
+target_file = sys.argv[1]
+
+bbc_data = pd.read_csv(target_file)
 
 # replace all null values
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
@@ -60,7 +62,7 @@ for f in session_unique:
             z = df.loc[(df['time_diff'] > lower_number) & (df['time_diff'] <= i)]
             number_events_list.append(len(z.index))
 
-    trace = go.Scatter(
+    trace = go.Scattergl(
         x=interval_list,
         y=number_events_list,
         text=df['participant_session_id'],
