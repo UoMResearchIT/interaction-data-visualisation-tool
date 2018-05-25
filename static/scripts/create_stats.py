@@ -2,14 +2,18 @@ import pandas as pd
 import numpy as np
 
 import os.path
+import sys
 
 # Read BBC Data
-bbc_data = pd.read_csv('static/input/bbc_data_session_id_condition.csv')
+
+file_path = sys.argv[1]
+
+bbc_data = pd.read_csv(file_path)
 
 bbc_data = bbc_data.drop('participant_session_id', 1)
 
 bbc_data['participant_session_id'] = bbc_data[['participant_id', 'session_id']]\
-    .apply(lambda x: '.'.join(str(value) for value in x), axis=1)
+    .apply(lambda x: '-'.join(str(value) for value in x), axis=1)
 
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
 
@@ -21,7 +25,6 @@ session_unique, session_count = np.unique(bbc_data['participant_session_id'], re
 # from this we are able to work out clicks per second, and seconds per click
 
 participant_id_list = []
-condition_list = []
 click_count_list = []
 time_taken_secs_list = []
 time_taken_mins_list = []
@@ -33,8 +36,6 @@ seconds_per_click_list = []
 for i in session_unique:
     # Sort data
     x = bbc_data.loc[bbc_data.participant_session_id == i, :]
-
-    condition = x['condition'].iloc[-1]
 
     # Calculate data
     click_count = np.count_nonzero(x == i)
@@ -56,7 +57,6 @@ for i in session_unique:
     seconds_per_click_list.append(seconds_per_click)
     clicks_per_minute_list.append(clicks_per_minute)
     minutes_per_click_list.append(minutes_per_click)
-    condition_list.append(condition)
 
 bbc_data_sorted = pd.DataFrame(
     {'participant_id': participant_id_list,
@@ -67,18 +67,18 @@ bbc_data_sorted = pd.DataFrame(
      'seconds_per_click': seconds_per_click_list,
      'clicks_per_minute': clicks_per_minute_list,
      'minutes_per_click': minutes_per_click_list,
-     'condition': condition_list,
      }
 )
 
-bbc_data_sorted = bbc_data_sorted[['participant_id', 'condition', 'click_count', 'time_taken_secs',
-                                   'time_taken_mins', 'clicks_per_second', 'seconds_per_click', 'clicks_per_minute', 'minutes_per_click', ]]
+bbc_data_sorted = bbc_data_sorted[['participant_id', 'click_count', 'time_taken_secs',
+                                   'time_taken_mins', 'clicks_per_second', 'seconds_per_click', 'clicks_per_minute',
+                                   'minutes_per_click' ]]
 
-csv_path = 'static\output\stats'
+csv_path = sys.argv[3]
+csv_name = sys.argv[2] + '_stats.csv'
+
 html_path = 'templates'
 
-bbc_data_sorted.to_csv(os.path.join(csv_path, r'bbc_data_stats.csv'))
-
+bbc_data_sorted.to_csv(os.path.join(csv_path, csv_name))
 bbc_data_sorted.to_html(os.path.join(html_path, r'bbc_data_stats.html'))
-
 
