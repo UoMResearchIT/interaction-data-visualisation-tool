@@ -31,39 +31,53 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('run_click', filename=filename))
+            return redirect(url_for('run_vis', filename=filename))
     return render_template('index.html')
 
 
 #  CLICK - Run scripts to get click type and density plots
 
-@app.route('/click', methods=['GET'])
-def run_click():
+@app.route('/vis', methods=['GET'])
+def run_vis():
     # Get variable for filename via POST and/or GET
     # put it in as system argument ie python arg1(script_name) arg2(filename)
 
     # file_name = request.args['file']
     file_name = str(request.args.get('filename'))
+    input_filepath = 'static/input/' + file_name
 
-    file_path = 'static/input/' + file_name
+    # make directory to store output from scripts
+    split_filename = os.path.splitext(file_name)[0]
+    main_directory = r'static/output/' + split_filename
+    os.makedirs(main_directory)
 
-    os.system("python static/scripts/action_item.py " + file_path)
-    os.system("python static/scripts/click_density.py " + file_path)
-    return render_template('click.html')
+    # click data directory
+    click_directory = main_directory + '/click_plots'
+    os.makedirs(click_directory)
+
+    # stats data directory
+    stats_directory = main_directory + '/stats'
+    os.makedirs(stats_directory)
+
+    csv_name = split_filename + '_stats.csv'
+    csv_path = stats_directory + '/' + csv_name
+
+    os.system("python static/scripts/action_item.py " + input_filepath + ' ' + split_filename)
+    os.system("python static/scripts/click_density.py " + input_filepath + ' ' + split_filename)
+
+    os.system("python static/scripts/create_stats.py " + input_filepath + ' ' + split_filename + ' ' + stats_directory)
+    os.system("python static/scripts/histogram_click_count.py " + csv_path + ' ' + split_filename)
+    os.system("python static/scripts/histogram_clicks_per_min.py " + csv_path + ' ' + split_filename)
+    os.system("python static/scripts/histogram_time_taken.py " + csv_path + ' ' + split_filename)
+
+    return render_template('vis.html')
 
 
-@app.route('/dl_click')
+@app.route('/dl_click', methods=['GET'])
 def run_dl_click():
     return send_file('templates\\bbc_data_action_item.html',
                      mimetype='text/html',
-                     attachment_filename='bbc_data_action_item.html',
                      as_attachment=True)
-
-
-@app.route('/dl_click_svg')
-def run_dl_click_svg():
-    os.system("python static/scripts/action_item_svg.py ")
-    return
 
 
 @app.route('/dl_click_density')
@@ -75,14 +89,6 @@ def run_dl_click_density():
 
 
 #  STATS = Run scripts to get stats and histograms
-
-@app.route('/stats')
-def run_stats():
-    os.system("python static/scripts/create_stats.py")
-    os.system("python static/scripts/histogram_click_count.py")
-    os.system("python static/scripts/histogram_clicks_per_min.py")
-    os.system("python static/scripts/histogram_time_taken.py")
-    return render_template('stats.html')
 
 
 @app.route('/dl_click_count_html')
