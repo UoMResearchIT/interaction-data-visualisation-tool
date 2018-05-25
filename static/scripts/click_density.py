@@ -7,10 +7,7 @@ import math
 
 import sys
 
-
-target_file = sys.argv[1]
-
-bbc_data = pd.read_csv(target_file)
+bbc_data = pd.read_csv(sys.argv[1])
 
 # replace all null values
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
@@ -82,7 +79,7 @@ for f in session_unique:
 data = traces
 
 layout = go.Layout(
-            title='Number of events in Intervals (seconds)',
+            title=sys.argv[2] + ' - Number of events in Intervals (seconds)',
             xaxis=dict(
                 title='Time in Intervals (Seconds)',
                 type="category"
@@ -95,5 +92,12 @@ layout = go.Layout(
 
 fig = go.Figure(data=data, layout=layout)
 
+filename = sys.argv[2] + '_click_density.html'
+
+file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
+
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_click_density.html',
+             auto_open=False)
+
+offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,
              auto_open=False)

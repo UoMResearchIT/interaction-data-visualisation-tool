@@ -5,9 +5,7 @@ import sys
 
 from flask import render_template
 
-target_file = sys.argv[1]
-
-bbc_data = pd.read_csv(target_file)
+bbc_data = pd.read_csv(sys.argv[1])
 
 time_diff = bbc_data['time_diff'] / 60
 participant_id = bbc_data['participant_id']
@@ -26,7 +24,7 @@ data = [dict(
 )]
 
 layout = go.Layout(
-    title='Participant ID and Time Difference Between Clicks',
+    title=sys.argv[2] + ' - Participant ID and Time Difference Between Clicks',
     hovermode='closest',
     xaxis=dict(
         title='Time in minutes',
@@ -41,5 +39,12 @@ path = 'static\output\plots'
 # offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
 #              auto_open=False)
 
+filename = sys.argv[2] + '_action_item.html'
+
+file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
+
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
-             auto_open=False, image='svg')
+             auto_open=False)
+
+offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,
+             auto_open=False)
