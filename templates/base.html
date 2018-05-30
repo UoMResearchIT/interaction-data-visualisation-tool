@@ -12,9 +12,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% if title %}
-		<title> CAKE Visualisation Project - {{ title }}</title>
+		<title> OBM Data Visualisation - {{ title }}</title>
 		{% else %}
-		<title> CAKE Visualisation Project - Home</title>
+		<title> OBM Data Visualisation - Home</title>
 		{% endif %}
 
 		<!--Bulma/FontAwesome pre-created stylesheets-->
@@ -23,14 +23,12 @@
         <link rel="script" href="https://cdn.plot.ly/plotly-latest.min.js">
         <link rel="script" href="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js">
         <link rel="script" href="https://code.jquery.com/jquery-2.1.4.min.js">
-        <link rel="script href="https://d14fo0winaifog.cloudfront.net/plotly-basic.js">
-
 
     </head>
 
     	<body>
 		<nav class="navbar is-info is-bold" role="navigation" aria-label="main navigation">
-  			<div class="navbar-brand">
+  			<div align="center" class="navbar-brand">
    				<a class="navbar-item" href="/">
       				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/BBC.svg/800px-BBC.svg.png" alt="Home" width="112" height="28">
    				</a>
@@ -40,34 +38,23 @@
 		<section class="hero is-dark is-bold">
 			<div class="container">
 				<br>
-	    			<h1 align="center", class="title is-1">CAKE Visualisation Project</h1>
+	    			<h1 align="left", class="title is-1">OBM Data Visualisation</h1>
 				{% if title %}
-				<h3 align="center", class="title is-4">{{ title }}</h3>
+				<h3 align="left", class="title is-4">{{ title }}</h3>
 				{% else %}
-				<h3 align="center", class="title is-4">App Web Interface</h3>
+				<h3 align="left", class="title is-4">Web App Interface</h3>
 				{% endif %}
 			</div>
-			<div class="hero-foot">
-    				<nav class="tabs">
-      					<div class="container">
-					</div>
-					<div class="container">
-          						<li class="is-active">
-							<br>
-							<li><p><a href="/">Home</a></p></li>
-							<li><p><a href="About">About</a><p><li>
-							</li>
-					</div>
-					<div class="container">
-					</div>
-				</nav>
-			</div>
+
+			<div class="container">
+            <br>
+            <p><a href="/">Home</a></p>
 			<br>
+
+            </div>
+
 		</section>
 
-
-		<br>
-		<br>
 
 		{% block content %}{% endblock %}
 
