@@ -62,6 +62,8 @@ def run_vis():
     csv_name = split_filename + '_stats.csv'
     csv_path = stats_directory + '/' + csv_name
 
+    os.system("python static/scripts/data_pre_pro.py " + input_filepath)
+
     os.system("python static/scripts/action_item.py " + input_filepath + ' ' + split_filename)
     os.system("python static/scripts/click_density.py " + input_filepath + ' ' + split_filename)
 
