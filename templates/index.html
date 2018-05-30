@@ -1,18 +1,17 @@
 {% extends "Base.html" %}
 
+{#
+    Template for the index. Users can upload their files and run them.
+#}
+
 {% block content %}
 	<div align="center">
 		<form method="POST" enctype=multipart/form-data>
       			<p><input type=file name=file>
-         		<input type=submit value=Upload>
+         		<input type=submit value='Run Analysis'>
     		</form>
 		<br>
 	</div>
-
-	<br>
-	<p align="center"><a href="/click"><button type="button">Run Click Analysis</button></a></p>
-    <p align="center"><a href="/stats"><button type="button">Run Stats Analysis</button></a></p>
-{#    <p align="center"><a href="/histogram"><button type="button">Run Histogram</button></a></p>#}
 <br>
 	
 	
