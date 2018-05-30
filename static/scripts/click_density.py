@@ -1,48 +1,50 @@
+# PLOTS CLICK DENSITY
+
 import plotly.offline as offline
 import plotly.graph_objs as go
 
 import pandas as pd
 import numpy as np
 import math
-
 import sys
 
+# Gets the first sys arg from app.py. Tells script where the input file is.
 bbc_data = pd.read_csv(sys.argv[1])
-
-# replace all null values
-bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
-
-pd.to_numeric(bbc_data['time_diff'])
 
 # Find number of unique sessions, and the number of clicks in each session
 session_unique, session_count = np.unique(bbc_data['participant_id'], return_counts=True)
 
+# Lists for the necessary to data to be put into
 all_interval_list = []
 all_number_of_events_list = []
 participant_id_list = []
 
-
+# List with all the traces
 traces = []
 
 for f in session_unique:
 
+    # 300 secs == 5 minutes. Can be changed
     interval = 300
 
+    # Create data frame with just that participant
     df = bbc_data.loc[bbc_data.participant_id == f, :]
 
-    # find the time taken
+    # Find total  time taken
     time_taken = df['time_diff'].iloc[-1]
 
-    # find out how many intervals there needs to be
+    # Find out how many intervals there needs to be
     number_of_intervals = (math.ceil(time_taken / interval)) + 1
 
+    # List of all intervals
     interval_list = []
 
-    # work out what the intervals will be
+    # Work out when the intervals will be
     for number in range(number_of_intervals):
         x = number * interval
         interval_list.append(x)
 
+    # List of number of events
     number_events_list = []
 
     # work out number of events
@@ -59,25 +61,29 @@ for f in session_unique:
             z = df.loc[(df['time_diff'] > lower_number) & (df['time_diff'] <= i)]
             number_events_list.append(len(z.index))
 
+    # Create a Trace based on data worked out above
     trace = go.Scattergl(
-        x=interval_list,
-        y=number_events_list,
-        text=df['participant_id'],
-        mode='lines',
-        name=str(f),
-        marker=dict(
+        x=interval_list,            # all the intervals
+        y=number_events_list,       # number of events at eahc interval
+        text=df['participant_id'],  # text to be displayed
+        mode='lines',               # use lines
+        name=str(f),                # name each line with participant_id
+        marker=dict(                # change opacity of marker
             opacity=0.75
                     ),
-        line=dict(
+        line=dict(                  # change opacity of line
             color='grey',
             width=0.5
         ),
     )
 
+    # add the trace to the trace list
     traces.append(trace)
 
+# DATA to be plotted
 data = traces
 
+# LAYOUT to be used
 layout = go.Layout(
             title=sys.argv[2] + ' - Number of events in Intervals (seconds)',
             xaxis=dict(
@@ -90,14 +96,19 @@ layout = go.Layout(
             hovermode='closest'
         )
 
+# create figure
 fig = go.Figure(data=data, layout=layout)
 
+# rename plot
 filename = sys.argv[2] + '_click_density.html'
 
+# filepath for plot
 file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
 
+# TEMPLATE - Plot saved in template folder to be displayed on web
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_click_density.html',
              auto_open=False)
 
+# STATIC - PLot saved in static to be retrieved later
 offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,
              auto_open=False)
