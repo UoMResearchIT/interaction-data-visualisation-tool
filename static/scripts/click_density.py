@@ -15,7 +15,7 @@ bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
 pd.to_numeric(bbc_data['time_diff'])
 
 # Find number of unique sessions, and the number of clicks in each session
-session_unique, session_count = np.unique(bbc_data['participant_session_id'], return_counts=True)
+session_unique, session_count = np.unique(bbc_data['participant_id'], return_counts=True)
 
 all_interval_list = []
 all_number_of_events_list = []
@@ -28,7 +28,7 @@ for f in session_unique:
 
     interval = 300
 
-    df = bbc_data.loc[bbc_data.participant_session_id == f, :]
+    df = bbc_data.loc[bbc_data.participant_id == f, :]
 
     # find the time taken
     time_taken = df['time_diff'].iloc[-1]
@@ -62,7 +62,7 @@ for f in session_unique:
     trace = go.Scattergl(
         x=interval_list,
         y=number_events_list,
-        text=df['participant_session_id'],
+        text=df['participant_id'],
         mode='lines',
         name=str(f),
         marker=dict(

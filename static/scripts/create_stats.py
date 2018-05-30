@@ -10,15 +10,10 @@ file_path = sys.argv[1]
 
 bbc_data = pd.read_csv(file_path)
 
-bbc_data = bbc_data.drop('participant_session_id', 1)
-
-bbc_data['participant_session_id'] = bbc_data[['participant_id', 'session_id']]\
-    .apply(lambda x: '-'.join(str(value) for value in x), axis=1)
-
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
 
 # Find number of unique sessions, and the number of clicks in each session
-session_unique, session_count = np.unique(bbc_data['participant_session_id'], return_counts=True)
+session_unique, session_count = np.unique(bbc_data['participant_id'], return_counts=True)
 
 # for loop filters the data by unique session, counts the number of clicks in that session
 # then finds the total amount of time in each session.
@@ -35,7 +30,7 @@ seconds_per_click_list = []
 
 for i in session_unique:
     # Sort data
-    x = bbc_data.loc[bbc_data.participant_session_id == i, :]
+    x = bbc_data.loc[bbc_data.participant_id == i, :]
 
     # Calculate data
     click_count = np.count_nonzero(x == i)
