@@ -138,7 +138,7 @@ def run_dl_time_taken():
 # Download the stats data as a CSV
 @app.route('/dl_stats_csv')
 def run_dl_stats_csv():
-    return send_file('static\output\\stats\\bbc_data_stats.csv',
+    return send_file('templates\\bbc_data_stats.csv',
                      mimetype='text/csv',
                      attachment_filename='bbc_data_stats.csv',
                      as_attachment=True)

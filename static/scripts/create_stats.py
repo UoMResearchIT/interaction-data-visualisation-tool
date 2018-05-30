@@ -78,9 +78,11 @@ csv_name = sys.argv[2] + '_stats.csv'
 # Set file path for HTML version to be saved to
 html_path = 'templates'
 
-# Save CSV
+# STATIC - Plot saved in static to be retrieved later
 bbc_data_sorted.to_csv(os.path.join(csv_path, csv_name))
 
-# Save HTML
+# TEMPLATE - Plot saved in template folder to be displayed on web
 bbc_data_sorted.to_html(os.path.join(html_path, r'bbc_data_stats.html'))
+bbc_data_sorted.to_csv(os.path.join(html_path, r'bbc_data_stats.csv'))
+
 
