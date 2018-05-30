@@ -50,6 +50,6 @@ file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
 offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
              auto_open=False)
 
-# STATIC - PLot saved in static to be retrieved later
+# STATIC - Plot saved in static to be retrieved later
 offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,
              auto_open=False)

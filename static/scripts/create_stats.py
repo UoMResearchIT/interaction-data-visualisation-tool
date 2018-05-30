@@ -4,18 +4,16 @@ import numpy as np
 import os.path
 import sys
 
-# Read BBC Data
+# Gets the first sys arg from app.py. Tells script where the input file is.
+bbc_data = pd.read_csv(sys.argv[1])
 
-file_path = sys.argv[1]
-
-bbc_data = pd.read_csv(file_path)
-
+# Replace null values (as precaution)
 bbc_data = bbc_data.replace([np.inf, -np.inf], np.nan).dropna(how="all")
 
 # Find number of unique sessions, and the number of clicks in each session
 session_unique, session_count = np.unique(bbc_data['participant_id'], return_counts=True)
 
-# for loop filters the data by unique session, counts the number of clicks in that session
+# for loop filters the data by unique participant, counts the number of clicks in that session
 # then finds the total amount of time in each session.
 # from this we are able to work out clicks per second, and seconds per click
 
@@ -53,6 +51,7 @@ for i in session_unique:
     clicks_per_minute_list.append(clicks_per_minute)
     minutes_per_click_list.append(minutes_per_click)
 
+# Create dataframe
 bbc_data_sorted = pd.DataFrame(
     {'participant_id': participant_id_list,
      'click_count': click_count_list,
@@ -65,15 +64,23 @@ bbc_data_sorted = pd.DataFrame(
      }
 )
 
+# Sort datatframe so be more readable
 bbc_data_sorted = bbc_data_sorted[['participant_id', 'click_count', 'time_taken_secs',
                                    'time_taken_mins', 'clicks_per_second', 'seconds_per_click', 'clicks_per_minute',
                                    'minutes_per_click' ]]
 
+# Set file path for the CSV to be saved to
 csv_path = sys.argv[3]
+
+# Set name of CSV
 csv_name = sys.argv[2] + '_stats.csv'
 
+# Set file path for HTML version to be saved to
 html_path = 'templates'
 
+# Save CSV
 bbc_data_sorted.to_csv(os.path.join(csv_path, csv_name))
+
+# Save HTML
 bbc_data_sorted.to_html(os.path.join(html_path, r'bbc_data_stats.html'))
 
