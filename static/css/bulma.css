@@ -10718,4 +10718,6 @@ label.panel-block:hover {
   z-index: -1;
 }
 
-/*# sourceMappingURL=bulma.css.map */
+ul b {
+  margin-left: 20px;
+}
