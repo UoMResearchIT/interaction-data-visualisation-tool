@@ -1,9 +1,9 @@
-# OBM Data Visualisation Tool (Working Title)
+# Interaction Data Visualisation Tool (IDVT)
  
 A web based data visualisation tool for the initial 
 analysis of low level interaction data taken from object based user experiences. 
 
-It takes the data and creates a set of plots that visualise the type and density 
+The IDVT takes the data and creates a set of plots that visualise the type and density 
 of clicks, as well as summary statistics such as total number of clicks, average number of
 clicks per second and total time taken.
 
@@ -80,7 +80,7 @@ The Web App is designed to take a CSV file with comma separated values as input 
 
 ### Essential Columns
 
-* **participant_id** - that refers to the individual users of the OBM experience.
+* **participant_id** - that refers to the individual users of the interactive experience.
 * **timestamp** - point in time when the event occurred, in datetime format eg (2017-08-17 19:41:09)
 * **item** - button participant has clicked on e.g. play button
 * **action** - the result of clicking button e.g. play, pause etc. 
