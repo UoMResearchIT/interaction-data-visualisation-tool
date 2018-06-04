@@ -1,11 +1,10 @@
 
-# OBM Data Visualisation Tool
+# Interaction Data Visualisation Tool
 
 
 ## Introduction
 
-Interaction data is messy (how?), messy(how?), complicated (how?) and difficult to work with.
-
+Interaction data is messy (how?), complicated (how?) and difficult to work with.
 - big, lots of it
 - difficult to read
 - machine readable, not human readable?
