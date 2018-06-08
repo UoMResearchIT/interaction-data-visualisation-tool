@@ -147,4 +147,4 @@ def run_dl_stats_csv():
 
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run()
+    app.run(host='0.0.0.0', debug=True)
