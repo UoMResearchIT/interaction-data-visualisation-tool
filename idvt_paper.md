@@ -14,20 +14,31 @@ I've created a web based data visualisation tool for the initial analysis of low
 
 ## Problem
 
-The goal was to create a web app that could take a CSV file, and output plots that can be used to inform a user on audience behaviour.
+(more background on the CAKE project?)
+The original goal was to create visualisations from interaction data from [CAKE](https://www.bbc.co.uk/taster/pilots/cook-along-kitchen-experience) (Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over that time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
 
-Initially visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. It's a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis. The problem was that the graphs aren't interactive, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have R and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
+Initially visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. It's a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
 
-It was necessary to look outside the R ecosystem. After looking at different languages and data visualisation frameworks, Python seemed the most obvious solution. I had prior knowledge using it with Django and Wagtail which would be useful for deployment and Python also offered a much bigger range of data visualisation packages to choose from. Of those, [Plotly for Python](https://plot.ly/d3-js-for-python-and-pandas-charts/), was the strongest candidate because it creates interactive plots by default, they are HTML files serialised with JSON, so are lightweight and easily shareable, and could be embedded in web pages.
+(example images)[![]()]
 
-[Dash](https://plot.ly/products/dash/), produced by the same team behind Plotly uses [Flask](http://flask.pocoo.org/) to create a dashboard interface that provides more control over interactivity, allowing for written user input, dropdown controls and the like, as well the layout such as multiple plots on a single page and providing space to add Markdown for descriptive text.     
 
-The scripts for all of these can be found in [Repositories](#repositories)
+The problem was that the graphs aren't interactive, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have R and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
 
-[id]: url "title"
+It was necessary to look outside the R ecosystem. After looking at different languages and data visualisation frameworks, Python seemed the most obvious solution. I had prior knowledge using it with Django and Wagtail which would be useful for deployment and Python also offered a much bigger range of data visualisation packages to choose from. Of those, [Plotly for Python](https://plot.ly/d3-js-for-python-and-pandas-charts/), was the strongest candidate because it creates interactive plots by default, the output is an HTML file serialised with JSON, so are lightweight and easily shareable, and could be embedded in web pages.
+
+(example images, some description of interactivity)![]()
+
+[Dash](https://plot.ly/products/dash/), produced by the same team behind Plotly uses [Flask](http://flask.pocoo.org/) to create a dashboard interface that provides more user control over interactivity; allowing for written user input, dropdown controls and the like; as well the layout such as multiple plots on a single page and providing space to add Markdown for descriptive text.  
+
+(example gif?) ![]()   
+
+> The scripts for testing packages can be found in the [Repositories](#repositories) section.
 
 ## Solution
 
+To build the web app I used Flask. It's lightweight and I already had some indirect experience with it using Dash. Django and Wagtail were also considered but were a bit heavy for what would be a two page web app.
+
+In the end Dash wasn't used as while it has many advantages as detailed earlier, it doesn't have a method for downloading a PNG or an interactive HTML file. These are important if they are to be included in research papers or easily shared with others.  
 
 
 ## What Does The Tool Do?
@@ -41,7 +52,9 @@ the visualisations, one that reveals the type of button clicks on a timeline
 and another that plots the density of button clicks in each five minute interval of the experience
 ([click_density.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/click_density.py)).
 
-Once those scripts have finished running an additional three scripts will run. [create_stats.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/create_stats.py) creates the statistics such as click count, time taken in secs and mins, clicks per second/minute, and clicks per second/minute. These are saved in to a CSV file that three histograms will be created
+Once those scripts have finished running an additional three scripts will run. [create_stats.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/create_stats.py) creates the statistics such as click count, time taken in secs and mins, clicks per second/minute, and clicks per second/minute. These are saved in to a CSV file that three histograms will be created.
+
+
 
 
 
