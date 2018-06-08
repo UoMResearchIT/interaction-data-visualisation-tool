@@ -103,10 +103,10 @@ fig = go.Figure(data=data, layout=layout)
 filename = sys.argv[2] + '_click_density.html'
 
 # filepath for plot
-file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
+file_path = 'static/output//' + sys.argv[2] + '/click_plots//' + filename
 
 # TEMPLATE - Plot saved in template folder to be displayed on web
-offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_click_density.html',
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//bbc_data_click_density.html',
              auto_open=False)
 
 # STATIC - PLot saved in static to be retrieved later

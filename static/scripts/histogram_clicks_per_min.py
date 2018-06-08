@@ -34,11 +34,11 @@ layout = go.Layout(
 filename = sys.argv[2] + 'histogram_clicks_per_minute.html'
 
 # Sets filepath for plot to be saved to
-file_path = 'static\output\\' + sys.argv[2] + '\stats\\' + filename
+file_path = 'static/output//' + sys.argv[2] + '/stats//' + filename
 
 # TEMPLATE - Plot saved in template folder to be displayed on web
 offline.plot({'data': data, 'layout': layout}, validate=False,
-             filename='templates\\bbc_data_histogram_clicks_per_minute.html', auto_open=False)
+             filename='templates//bbc_data_histogram_clicks_per_minute.html', auto_open=False)
 
 # STATIC - Plot saved in static to be retrieved later
 offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,

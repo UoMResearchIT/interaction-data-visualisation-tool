@@ -44,12 +44,14 @@ layout = go.Layout(
 filename = sys.argv[2] + '_action_item.html'
 
 # Sets filepath for plot to be saved to
-file_path = 'static\output\\' + sys.argv[2] + '\click_plots\\' + filename
+file_path = 'static/output//' + sys.argv[2] + '/click_plots//' + filename
 
 # TEMPLATE - Plot saved in template folder to be displayed on web
-offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates\\bbc_data_action_item.html',
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//bbc_data_action_item.html',
              auto_open=False)
 
 # STATIC - Plot saved in static to be retrieved later
 offline.plot({'data': data, 'layout': layout}, validate=False, filename=file_path,
              auto_open=False)
+
+
