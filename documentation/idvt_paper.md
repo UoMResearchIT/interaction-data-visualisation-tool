@@ -22,13 +22,17 @@ The original goal was to create visualisations from interaction data from
 
 Initial visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. R is a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
 
+Below are two examples. More can be found [here](tests/r/results), along with R Workbooks that go through step by step the thought process.
+
 ![Density of Clicks](tests/r/results/1_first_visualisations/2e_sixty_minutes.png)
 
-The problem was that the graphs aren't interactive, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have R and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
+![Type of Clicks](tests/r/results/1_first_visualisations/types_of_clicks/types_clicks_sixty_minutes.png)
+
+The problem was these plots are, they lack interactivity, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. (Note the number of graphs in the [results folder](tests/r/results)) Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
 
 It was necessary to look outside the R ecosystem. After looking at different languages and data visualisation frameworks, Python seemed the most obvious solution. I had prior knowledge using it with Django and Wagtail which would be useful for deployment and Python also offered a much bigger range of data visualisation packages to choose from. Of those, [Plotly for Python](https://plot.ly/d3-js-for-python-and-pandas-charts/), was the strongest candidate because it creates interactive plots by default, the output is an HTML file serialised with JSON, so are lightweight and easily shareable, and could be embedded in web pages.
 
-(example images, some description of interactivity)![]()
+![Density of Clicks](tests/python/results/read_bbc_data/read_bbc_data.html)
 
 [Dash](https://plot.ly/products/dash/), produced by the same team behind Plotly uses [Flask](http://flask.pocoo.org/) to create a dashboard interface that provides more user control over interactivity; allowing for written user input, dropdown controls and the like; as well the layout such as multiple plots on a single page and providing space to add Markdown for descriptive text.  
 
