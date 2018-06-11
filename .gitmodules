@@ -1,0 +1,6 @@
+[submodule "documentation/bbc_data_plotly"]
+	path = documentation/bbc_data_plotly
+	url = https://github.com/UoMResearchIT/bbc_data_plotly.git
+[submodule "documentation/BBC-CAKE-data-analysis"]
+	path = documentation/BBC-CAKE-data-analysis
+	url = https://github.com/UoMResearchIT/BBC-CAKE-data-analysis.git
