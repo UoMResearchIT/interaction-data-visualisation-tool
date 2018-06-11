@@ -3,3 +3,6 @@ static/input/*
 static/output/*
 venv
 __pycache__
+.Rproj.user
+documentation/python/data/*
+documentation/r/data/*
