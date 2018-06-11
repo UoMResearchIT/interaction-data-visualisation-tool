@@ -19,9 +19,10 @@ The original goal was to create visualisations from interaction data from
 [CAKE](https://www.bbc.co.uk/taster/pilots/cook-along-kitchen-experience)
 (Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over that time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
 
+
 Initial visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. R is a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
 
-![Density of Clicks](bbc_data_flask_app/documentation/tests/r/results/1_first_visualisations/2e_sixty_minutes.png)
+![Density of Clicks](/tests/r/results/1_first_visualisations/2e_sixty_minutes.png)
 
 The problem was that the graphs aren't interactive, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have R and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
 
