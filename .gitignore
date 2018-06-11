@@ -4,5 +4,5 @@ static/output/*
 venv
 __pycache__
 .Rproj.user
-documentation/python/data/*
-documentation/r/data/*
+documentation/python/data/
+documentation/r/data/
