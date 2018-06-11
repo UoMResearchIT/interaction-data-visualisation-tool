@@ -1,0 +1,49 @@
+---
+title: "First Visualisations"
+output:  html_notebook
+---
+
+
+I did several things with the interaction_live.csv to make it easier to plot points. 
+
+1) I mutated a columns with the participant_session_id which makes it easier to tell which participant did the action and in which session. A session was ended if there was more than 30 minutes with no activity.
+
+2) Combined action and item to action_item. They are similar descriptors and I wanted to cut down on "types" of button clicks.
+
+3) To create plot points I also added a time_diff column. 
+
+The script I used can be read in "src/create_bbc_data_session_id.R"
+
+From this I ran several plots to see if there are any patterns. This script can be found in "src/read_bbc_data_session_id.R" 
+
+```{r}
+
+plot(all)
+
+```
+
+As you can see the number of minutes is massive as you go along the x axis. Several participants clearly had multiple sessions, and in some cases those multiple sessions happened a long time after the previous.
+
+To make the data clearer I changed the parameters to 1, 5, 1, 30, 60 and 120 minutes from the start of the first session. This gives a better look at the denisty of clicks than looking at the entire timeline.
+Below is 30 mins. The rest can be found in "results/bbc_data_session_id/density"
+
+NOTE: The original plots for desnity of clicks can be found in "results/bbc_data_session_id" folder. These were originally labelled "clicks per x minutes". I renamed it to density as I thought this was a more representitive title for the plot.
+
+
+```{r}
+plot(thirty)
+```
+While density is one measure of looking at the data, type of clicks is perhaps more interesting.
+
+I changed the parameters of the plot to colour the different types of clicks. To do this I took "action_time", mentioned earlier to be the type of clicks. Becuase of the number of types of clicks, the legend is currently hidden as it obscures the graph. The types will maybe need to be whittled down or grouped together for readability.
+
+```{r}
+plot(thirty_colour)
+```
+The rest of these graphs can be found in "results/bbc_data_session_id/types_of_clicks"
+
+
+These plots give a broad overview; all the experimental conditions on the same graph. It looks a bit messy. Jonathan created a new version of the original data, with conditions added so that the graph can be split by experiment.
+
+
+

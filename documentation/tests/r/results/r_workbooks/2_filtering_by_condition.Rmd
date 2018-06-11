@@ -1,0 +1,67 @@
+---
+title: "Filtering Data by Condition Type"
+output:
+  html_notebook
+---
+
+### Introduction
+
+Jonathan created interaction_live_condition.csv which was the same data as before but with added column stating which condition each participant was in. Bar a few exceptions they roughly correesponded to be within the same 100 numbers.
+
+I wrote a script to filter by condition number and then create a plot. Below are the density of clicks in the first thirty minutes of each condition.The script can be found in "src/split_into_conditions.R"
+
+```{r}
+plot(c1)
+
+```
+
+```{r}
+plot(c2)
+```
+
+```{r}
+plot(c3)
+
+```
+
+```{r}
+plot(c4)
+```
+
+A combined plot can be found at "results/bbc_data_session_id_condition/density/density_clicks_conditions_thirty_minutes.png"
+
+### Individual Users
+
+At Jonathan's suggestion I took a user from each condition to map the types of clicks onto. This way there is space for the legend, and it might throw up some interesting behavioural observations.
+
+```{r}
+plot(type_click_indiv_user)
+```
+There is a dense lin ein the middle, suggesting that the user played, paused and rewond a lot. I went in a little further and looked at that specific segment, focusiing betrween the 12th and 13th minute.
+
+```{r}
+plot(type_click_indiv_user_sig)
+```
+I repeated the same plot for a user in each condition.
+
+```{r}
+plot(type_click_indiv_user_two)
+```
+
+```{r}
+plot(type_click_indiv_user_three)
+```
+```{r}
+plot(type_click_indiv_user_four)
+```
+Looking at individual users from each condition gives us a better idea of which types of clicks are used by user in each condition.
+
+
+### Comparing Multiple Individual Users 
+
+Comparing these users on one plot we can see the differences in types a lot more clearly than on individual plots.The legend is still a little messy but at least it doesn't overwhelm the plot.
+
+```{r}
+plot(group_users_plot)
+```
+To make this more effective we could try and quantify what a "typical" user is and compare that across the different conditions.

@@ -1,0 +1,12 @@
+name: bbc_interaction_web
+title: bbc_interaction_web
+username:
+account: joshwoodcock
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 270283
+bundleId: 1204700
+url: https://joshwoodcock.shinyapps.io/bbc_interaction_web/
+when: 1517584695.39745
+asMultiple: FALSE
+asStatic: FALSE
