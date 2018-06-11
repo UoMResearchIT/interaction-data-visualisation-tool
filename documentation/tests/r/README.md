@@ -52,12 +52,12 @@ Shiny apps require a bit more set-up. Follow the set-up instructions below.
 
 3. Install the following packages via the Terminal in RStudio.
 
-  ```
-  install.packages("tidyverse")
-  install.packages("shiny")
-  install.packages("forcats")
-  install.packages("tidyverse")
-  ```
+    ```
+    install.packages("tidyverse")
+    install.packages("shiny")
+    install.packages("forcats")
+    install.packages("tidyverse")
+    ```
 
 4. Choose which shiny app to run and open `app.R` click 'Run App' in top right corner.
 
