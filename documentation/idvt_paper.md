@@ -7,20 +7,21 @@
 Interaction data is messy, there is a lot of it; complicated, it is challenging to read;
 and difficult to work with due to the number of unique features.
 
-However, interaction data has the potential to be a great resource in identifying audience
-behaviour (ref Measuring Behaviours paper?, see other refs used to see if applicable).
+However, interaction data has the potential to be a great resource in identifying
+audience behaviour (ref Measuring Behaviours paper?, see other refs used to see if
+applicable).
 
 I've created a web based data visualisation tool for the initial analysis of low level interaction data taken from user experiences. It provides a way to create abstractions and visualisations of the data to inform a feature selection process that can tease out audience behaviours.  
 
 ## Problem
 
-(more background on the CAKE project?)
-The original goal was to create visualisations from interaction data from [CAKE](https://www.bbc.co.uk/taster/pilots/cook-along-kitchen-experience) (Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over that time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
+The original goal was to create visualisations from interaction data from
+[CAKE](https://www.bbc.co.uk/taster/pilots/cook-along-kitchen-experience)
+(Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over that time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
 
-Initially visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. It's a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
+Initial visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. R is a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
 
-(example images)[![]()]
-
+![Density of Clicks](bbc_data_flask_app/documentation/tests/r/results/1_first_visualisations/2e_sixty_minutes.png)
 
 The problem was that the graphs aren't interactive, which makes it easier to explore the data without having to constantly writing new scripts to make a new plot based on a feature or data point that you wanted a closer look at. Shiny, an R package that can build interactive plots that could be deployed to the web app seemed like a logical option. Unfortunately the plots couldn't be shared easily as they required the recipient to have R and [RStudio](https://www.rstudio.com/) installed, and the it couldn't give the flexibility needed to deploy on our own servers.
 
@@ -40,7 +41,6 @@ To build the web app I used Flask. It's lightweight and I already had some indir
 
 In the end Dash wasn't used as while it has many advantages as detailed earlier, it doesn't have a method for downloading a PNG or an interactive HTML file. These are important if they are to be included in research papers or easily shared with others.  
 
-
 ## What Does The Tool Do?
 
 The IDVT takes the interaction data and creates a set of plots that visualise the type and density of clicks, as well as summary statistics such as total number of clicks, average number of clicks per second and total time taken.
@@ -53,10 +53,6 @@ and another that plots the density of button clicks in each five minute interval
 ([click_density.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/click_density.py)).
 
 Once those scripts have finished running an additional three scripts will run. [create_stats.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/create_stats.py) creates the statistics such as click count, time taken in secs and mins, clicks per second/minute, and clicks per second/minute. These are saved in to a CSV file that three histograms will be created.
-
-
-
-
 
 
 ### Essential Columns
@@ -82,7 +78,7 @@ Will also create the 'time_diff' and 'action_item' columns needed for the plots.
 
 * `click_density.py` - plots the density of clicks across a 300 second (5 minute intervals)
 
-* `create_stats.py`- creates a CSV of the statistical data such as click count,time taken in minutes/seconds, clicks per minute/second, minutes/secs per click.
+* `create_stats.py`- creates a CSV of the statistical data such as click count, time taken in minutes/seconds, clicks per minute/second, minutes/secs per click.
 this is then used to create histograms.
 
 * `histogram_click_count.py`, `histogram_clicks_per_min.py` and `histogram_time_taken.py` create histograms based on the click count, clicks per minute and time taken.
@@ -111,5 +107,5 @@ Large Data Sets = takes longer to get the data needed for plots, lots of statist
 
 ## Repositories
 
-* [BBC-CAKE-data-analysis](https://github.com/UoMResearchIT/BBC-CAKE-data-analysis) - R scripts for initial analysis and testing
-* [bbc_data_plotly](https://github.com/UoMResearchIT/bbc_data_plotly) - Python scripts for  
+* BBC-CAKE-data-analysis - R scripts for initial analysis and testing
+* bbc_data_plotly - Python scripts for Plotly and Dash  
