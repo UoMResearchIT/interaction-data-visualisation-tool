@@ -1,6 +1,17 @@
 
 # Interaction Data Visualisation Tool (IDVT)
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Interaction Data Visualisation Tool (IDVT)](#interaction-data-visualisation-tool-idvt)
+	- [Introduction](#introduction)
+	- [Problem](#problem)
+	- [What Does The Tool Do?](#what-does-the-tool-do)
+	- [Analysing Results](#analysing-results)
+	- [Future Development](#future-development)
+	- [Acknowledgments](#acknowledgments)
+
+<!-- /TOC -->
 
 ## Introduction
 
@@ -32,85 +43,80 @@ The problem was these plots are, they lack interactivity, which makes it easier 
 
 It was necessary to look outside the R ecosystem. After looking at different languages and data visualisation frameworks, Python seemed the most obvious solution. I had prior knowledge using it with Django and Wagtail which would be useful for deployment and Python also offered a much bigger range of data visualisation packages to choose from. Of those, [Plotly for Python](https://plot.ly/d3-js-for-python-and-pandas-charts/), was the strongest candidate because it creates interactive plots by default, the output is an HTML file serialised with JSON, so are lightweight and easily shareable, and could be embedded in web pages.
 
-![Density of Clicks](tests/python/results/read_bbc_data/read_bbc_data.html)
+> The results of these can be found [here](tests/python/results). Unfortunately due to the size of the HTML files, they can't be rendered in Github. To view, download file then open in browser.
 
 [Dash](https://plot.ly/products/dash/), produced by the same team behind Plotly uses [Flask](http://flask.pocoo.org/) to create a dashboard interface that provides more user control over interactivity; allowing for written user input, dropdown controls and the like; as well the layout such as multiple plots on a single page and providing space to add Markdown for descriptive text.  
 
-(example gif?) ![]()   
+> The results of these can be found [here](tests/python/src/dash_app). To view follow the
 
-> The scripts for testing packages can be found in the [Repositories](#repositories) section.
+The potential was there to bring these scripts together as a more generalised tool that could be used for future OBM experiences at the BBC or indeed any type of interaction data. It was decided to build a web app because it would be easier to deploy and update as well as for users to access.
 
-## Solution
+Django and Wagtail were considered as potential frameworks but were a bit heavy for what would be a two page web app. I eventually settled on Flask. It's lightweight, quick and easy to develop for, and I already had some indirect experience with it using Dash.
 
-To build the web app I used Flask. It's lightweight and I already had some indirect experience with it using Dash. Django and Wagtail were also considered but were a bit heavy for what would be a two page web app.
-
-In the end Dash wasn't used as while it has many advantages as detailed earlier, it doesn't have a method for downloading a PNG or an interactive HTML file. These are important if they are to be included in research papers or easily shared with others.  
+In the end Dash wasn't used as while it has many advantages as detailed earlier, it doesn't have a method for downloading a PNG or an interactive HTML file. These are important if they are to be easily shared with others or added to research papers. If these features are eventually implemented in Dash it would be worth considering adding to a IDVT.    
 
 ## What Does The Tool Do?
 
 The IDVT takes the interaction data and creates a set of plots that visualise the type and density of clicks, as well as summary statistics such as total number of clicks, average number of clicks per second and total time taken.
 
-The tool is designed to take a CSV file with comma separated values as an input.
-It then runs a Python script to pre process the data to clean up and infinite or NAN values as well as making sure it contains the columns needed to create the visualisations, and, if not, generating the columns. Another two scripts construct
-the visualisations, one that reveals the type of button clicks on a timeline
-([action_item.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/action_item.py))
-and another that plots the density of button clicks in each five minute interval of the experience
-([click_density.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/click_density.py)).
+I built upon an existing project at the BBC, [musicMixSepratation](https://github.com/bbc/musicMixSeparation) that separates different instruments in an audio mix, but, at a basic level does the same thing as I wanted; take an input, applies some Python scripts and gives an output. I used their CSS and modified their templates, then added my own views in the `app.py` to add the logic behind the app, such as creating the directories for each new piece of data uploaded, running the scripts to create the plots, statistics etc.
 
-Once those scripts have finished running an additional three scripts will run. [create_stats.py](https://github.com/UoMResearchIT/bbc_data_flask_app/blob/master/static/scripts/create_stats.py) creates the statistics such as click count, time taken in secs and mins, clicks per second/minute, and clicks per second/minute. These are saved in to a CSV file that three histograms will be created.
+The tool is designed to take a CSV file with comma separated values as an input. It needs to have the following columns:
 
-
-### Essential Columns
 
 * **participant_id** - that refers to the individual users of the interactive experience.
 * **timestamp** - point in time when the event occurred, in datetime format eg (2017-08-17 19:41:09)
 * **item** - button participant has clicked on e.g. play button
 * **action** - the result of clicking button e.g. play, pause etc.
 
-All other columns needed will be generated by either `data_pre_pro.py` or `create_stats.py`
 
-### Run Analysis
+> All other columns needed will be generated by either `data_pre_pro.py` or `create_stats.py`
 
-Clicking Run Analysis will take the CSV file uploaded by the user and create visualisations using the open source
-[Plotly for Python](https://github.com/plotly/plotly.py)
-
-It will run the following scripts -
+Once, "Run Analysis" is clicked, the following scripts will run -
 
 * `data_pre_pro.py` - pre processes the data to get rid of inf, and NAN values.
 Will also create the 'time_diff' and 'action_item' columns needed for the plots.
 
 * `action_item.py` - takes the processed data and plots the type of clicks (i.e action_item) across time.
 
-* `click_density.py` - plots the density of clicks across a 300 second (5 minute intervals)
+* `click_density.py` - plots the density of clicks across a 300 second interval (5 minute intervals)
 
 * `create_stats.py`- creates a CSV of the statistical data such as click count, time taken in minutes/seconds, clicks per minute/second, minutes/secs per click.
 this is then used to create histograms.
 
 * `histogram_click_count.py`, `histogram_clicks_per_min.py` and `histogram_time_taken.py` create histograms based on the click count, clicks per minute and time taken.
 
-Each data file uploaded by the user will create its own directory in `static/output` to store the relevant outputs.
-
-All plots and an HTML version of the stats are also saved in `templates/` to be rendered by the `vis.html` template.
-
-## What Can Be Gained from this Tool?
-
-Insight into which features are important,
-
-clicks - colour coding
-density - see when most of the clicks are happening
-
-histograms - can see patterns of time, clicks, clicks per minute. Why are these important?
-
-## Applications?
-
-Speed up initial analysis and features to look out for.
+All plots, and an HTML version of the stats are also saved in `templates/` to be rendered by the `vis.html` template. This is overwritten every time a new CSV file is uploaded, so plots are also save to `static/output/<CSV_filename>`
 
 
-## Limitations
+## Analysing Results
 
-Large Data Sets = takes longer to get the data needed for plots, lots of statistical noise.
+Once the scripts have finished running the results are displayed using the `vis.html` template. Each is interactive with controls such as zoom in/out, pan, select etc in the Plotly toolbar.
 
-## Repositories
+The results are displayed in the following order -
 
-* BBC-CAKE-data-analysis - R scripts for initial analysis and testing
-* bbc_data_plotly - Python scripts for Plotly and Dash  
+1. **Click Type** - Hovering over will display the Participant ID, Action Item and Time (in Minutes). Action Item can be filtered on the right to narrow down the type of click a user wants displayed.
+The "compare data on hover" option in the Plotly toolbar is useful if want to see all the types of clicks at a particular time.
+2. **Click Density** - Hovering over will display the Participant ID, Interval time and Number of events in that interval. Participants can be filtered on the right.
+3. **Click Count** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
+4. **Clicks Per Minute** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
+5. **Time Taken (in Minutes)** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
+6. **Table of Stats** - A table of the stats generated by `create_stats.py`.
+
+Each plot can be downloaded as a HTML by clicking the 'Download .... as HTML' button, or as PNG by clicking the camera icon that is part of the Plotly toolbar.
+
+A CSV of Table of Stats can be downloaded via the 'Download as CSV' button.
+
+## Future Development
+
+- Add simple slider to toggle time on plots generated by `action_item` and `click_density`. More info [here](https://plot.ly/python/sliders/)
+- Make scripts more efficient for larger datasets
+- Ability to download plots from previously uploaded datasets. This has been set-up with separate folders. Implementation needs to be finished.
+
+## Acknowledgments
+
+* Jonathan Carlton, Andy Brown, BBC R&D
+* Louise Lever, Caroline Jay, John Keane, University of Manchester
+* Contributors to the BBC musicMixSeparation repository -
+[Bruce Weir](https://github.com/bruceweir), [Juliette Carter](https://github.com/JulietteCarter),
+[Dom Hyem](https://github.com/DomHyem)  
