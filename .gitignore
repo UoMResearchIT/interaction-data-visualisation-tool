@@ -6,3 +6,4 @@ __pycache__
 .Rproj.user
 documentation/tests/python/data/*
 documentation/tests/r/data/*
+templates/bbc_*
