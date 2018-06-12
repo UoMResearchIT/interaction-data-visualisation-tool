@@ -1,16 +1,11 @@
 # Interaction Data Visualisation Tool (IDVT)
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Interaction Data Visualisation Tool (IDVT)](#interaction-data-visualisation-tool-idvt)
 	- [Installation](#installation)
 		- [Requirements](#requirements)
 				- [Windows](#windows)
 				- [Linux](#linux)
-				- [Windows](#windows)
-				- [Linux](#linux)
 		- [Run Flask App on Development Server](#run-flask-app-on-development-server)
-				- [Windows](#windows)
-				- [Linux](#linux)
 		- [External Deployment Options](#external-deployment-options)
 	- [Usage](#usage)
 		- [Essential Columns](#essential-columns)
@@ -18,7 +13,6 @@
 		- [Results](#results)
 	- [License](#license)
 
-<!-- /TOC -->
 
 ![index.html](documentation/screenshots/index.png)
 
