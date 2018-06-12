@@ -1,5 +1,7 @@
 # Interaction Data Visualisation Tool (IDVT)
 
+![index.html](documentation/screenshots/index.png)
+
 A web based data visualisation tool for the initial
 analysis of low level interaction data taken from object based user experiences.
 
