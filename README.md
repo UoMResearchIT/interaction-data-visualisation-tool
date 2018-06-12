@@ -1,4 +1,24 @@
 # Interaction Data Visualisation Tool (IDVT)
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Interaction Data Visualisation Tool (IDVT)](#interaction-data-visualisation-tool-idvt)
+	- [Installation](#installation)
+		- [Requirements](#requirements)
+				- [Windows](#windows)
+				- [Linux](#linux)
+				- [Windows](#windows)
+				- [Linux](#linux)
+		- [Run Flask App on Development Server](#run-flask-app-on-development-server)
+				- [Windows](#windows)
+				- [Linux](#linux)
+		- [External Deployment Options](#external-deployment-options)
+	- [Usage](#usage)
+		- [Essential Columns](#essential-columns)
+		- [Run Analysis](#run-analysis)
+		- [Results](#results)
+	- [License](#license)
+
+<!-- /TOC -->
 
 ![index.html](documentation/screenshots/index.png)
 
@@ -119,7 +139,7 @@ The results are displayed in the following order -
 
 1. **Click Type** - Hovering over will display the Participant ID, Action Item and Time (in Minutes). Action Item can be filtered on the right to narrow down the type of click a user wants displayed.
 The "compare data on hover" option in the Plotly toolbar is useful if want to see all the types of clicks at a particular time.
-2. **Click Density** - Hovering over will display the Participant ID, Interval time and Number of events in that interval. Participants cna be filtered on the right.
+2. **Click Density** - Hovering over will display the Participant ID, Interval time and Number of events in that interval. Participants can be filtered on the right.
 3. **Click Count** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
 4. **Clicks Per Minute** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
 5. **Time Taken (in Minutes)** - Hovering over will display the number of participants and the bin size (automatically set depending on data)
