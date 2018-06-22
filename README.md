@@ -84,10 +84,160 @@ $ export FLASK_APP=app.py
 $ flask run
 ```
 
+### External Deployment
 
-### External Deployment Options
+This section will run through deploying the app on a Ubuntu Virtual Machine. For other option refer to [Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
 
-[Refer to Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
+
+#### Install Requirements
+
+We need to create a new user with 'sudo' privileges
+
+```
+$ adduser newuser
+$ adduser newuser sudo
+
+```
+SSH into the server with the new user and update packages on the VM.
+
+```
+$ sudo apt-get update
+$ sudo apt-get install -y python3 python-pip python-venv nginx gunicorn  nano git build-essential libssl-dev libffi-dev python3-dev
+
+```
+Check that Python 3 is installed
+
+```
+$ python3 -V
+```
+
+Create a new directory to store the project
+
+```
+$ sudo mkdir /home/www && cd /home/www
+
+```
+In the directory we'll fetch the repo holding the project, then checkout the deployment branch
+
+```
+$ sudo git clone <repo URL>
+$ cd <repo_name>
+$ sudo git checkout deployment
+
+```
+
+Create a virtual environment
+
+```
+$ sudo python3 -m venv <name_of_virtual_environment>
+```
+
+Activate via -
+
+```
+$ source <name_of_virtual_environment>/bin/activate
+
+```
+When activated your prompt will be prefixed with the name of your environment. Install project requirements.
+
+
+```
+$ sudo pip install -r requirements.txt
+
+```
+
+That's the initial set-up complete.
+
+#### Configure nginx and gunicorn
+
+nginx and gunicorn will allow the app to run continuously.
+
+We need to start nginx -
+
+```
+$ sudo /etc/init.d/nginx start
+```
+then remove the default configuration, and create a new config file which nginx will load on startup:
+
+
+```
+$ sudo rm /etc/nginx/sites-enabled/default
+$ sudo touch /etc/nginx/sites-available/bbc_data_flask_app
+$ sudo ln -s /etc/nginx/sites-available/bbc_data_flask_app /etc/nginx/sites-enabled/bbc_data_flask_app
+```
+To add the config setting we'll use nano
+
+```
+$ sudo nano /etc/nginx/sites-enabled/bbc_data_flask_app
+
+```
+and add -
+
+```text
+
+server {
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+    location /static {
+        alias  /home/www/bbc_data_flask_app/static/;
+    }
+}
+
+```
+
+Restart nginx and then run project -
+```
+$ sudo /etc/init.d/nginx restart
+$ cd /home/www/bbc_data_flask_app/
+$ gunicorn app:app -b localhost:8000
+
+```
+Open browser and navigate to your domain name or IP address. You will be greeted by -
+
+![index.html](documentation/screenshots/index.png)
+
+#### Configure Supervisor
+
+If forking IDVT and working on new features you may want to set-up [Supervisor](http://supervisord.org/index.html) so don't need to manually start and restart gunicorn each time changes are made to the app.
+
+1) Install Supervisor:
+
+```
+$ sudo apt-get install -y supervisor
+
+```
+2) Create configuration file:
+
+```
+$ sudo nano /etc/supervisor/conf.d/bbc_data_flask_app.conf
+```
+
+3) Add the following to the config file:
+
+```
+[program:flask_project]
+command = gunicorn app:app -b localhost:8000
+directory = /home/www/flask_project
+user = newuser
+
+```
+
+4) Stop gunicorn:
+
+```
+$ sudo pkill gunicorn
+```
+
+5) Start gunicorn with Supervisor:
+
+```
+$ sudo supervisorctl reread
+$ sudo supervisorctl update
+$ sudo supervisorctl start bbc_data_flask_app
+```
 
 ## Usage
 
