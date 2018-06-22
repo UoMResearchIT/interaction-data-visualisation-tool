@@ -1,6 +1,4 @@
 .idea
-static/input/*
-static/output/*
 venv
 __pycache__
 .Rproj.user
