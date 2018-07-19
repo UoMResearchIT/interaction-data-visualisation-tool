@@ -15,14 +15,9 @@
 
 ## Introduction
 
-Interaction data is messy, there is a lot of it; complicated, it is challenging to read;
-and difficult to work with due to the number of unique features.
+Interaction data is messy, there is a lot of it; making it is challenging to read and difficult to work with due to the number of unique features.
 
-However, interaction data has the potential to be a great resource in identifying
-audience behaviour (ref Measuring Behaviours paper?, see other refs used to see if
-applicable).
-
-I've created a web based data visualisation tool for the initial analysis of low level interaction data taken from user experiences. It provides a way to create abstractions and visualisations of the data to inform a feature selection process that can tease out audience behaviours.  
+I created a web based data visualisation tool for the initial analysis of low level interaction data taken from user experiences. It provides a way to create abstractions and visualisations of the data to inform a feature selection process that can tease out audience behaviours.  
 
 ## Problem
 
@@ -47,7 +42,7 @@ It was necessary to look outside the R ecosystem. After looking at different lan
 
 [Dash](https://plot.ly/products/dash/), produced by the same team behind Plotly uses [Flask](http://flask.pocoo.org/) to create a dashboard interface that provides more user control over interactivity; allowing for written user input, dropdown controls and the like; as well the layout such as multiple plots on a single page and providing space to add Markdown for descriptive text.  
 
-> The results of these can be found [here](tests/python/src/dash_app). To view follow the
+> The results of these can be found [here](tests/python/src/dash_app).To view see README.md
 
 The potential was there to bring these scripts together as a more generalised tool that could be used for future OBM experiences at the BBC or indeed any type of interaction data. It was decided to build a web app because it would be easier to deploy and update as well as for users to access.
 
@@ -59,7 +54,7 @@ In the end Dash wasn't used as while it has many advantages as detailed earlier,
 
 The IDVT takes the interaction data and creates a set of plots that visualise the type and density of clicks, as well as summary statistics such as total number of clicks, average number of clicks per second and total time taken.
 
-I built upon an existing project at the BBC, [musicMixSepratation](https://github.com/bbc/musicMixSeparation) that separates different instruments in an audio mix, but, at a basic level does the same thing as I wanted; take an input, applies some Python scripts and gives an output. I used their CSS and modified their templates, then added my own views in the `app.py` to add the logic behind the app, such as creating the directories for each new piece of data uploaded, running the scripts to create the plots, statistics etc.
+I built upon an existing project at BBC R&D, [musicMixSepratation](https://github.com/bbc/musicMixSeparation) that separates different instruments in an audio mix, but, at a basic level does the same thing as I wanted; take an input, applies some Python scripts and gives an output. I used their CSS and modified their templates, then added my own views in the `app.py` to add the logic behind the app, such as creating the directories for each new piece of data uploaded, running the scripts to create the plots, statistics etc.
 
 The tool is designed to take a CSV file with comma separated values as an input. It needs to have the following columns:
 
@@ -107,7 +102,19 @@ Each plot can be downloaded as a HTML by clicking the 'Download .... as HTML' bu
 
 A CSV of Table of Stats can be downloaded via the 'Download as CSV' button.
 
-## Future Development
+These data points were chosen as they are fairly broad, meaning that the tool's user can ask an array of questions of the data. This means that the tool works for you rather than you working for the tool.
+
+## Practical Uses for tool
+
+The IDVT has been already been used to inform research into audience behaviour.
+
+An earlier version was used in "Identifying Latent Indicators of Technical Difficulties from Interaction Data" by Jonathan Carlton, Joshua Woodcock, Andy Brown, John Keane, and Caroline Jay. The paper is an exploratory look at how technical difficulties could be identified through looking at audience interaction data.
+
+It is a valuable area to explore as creating online interactive media is a time consuming and expensive process with the goal being audience engagement. Technical difficulties get in the way of the engagement process, thus if there was a way to predict or react to these faults it would be incredibly useful to broadcasters and media companies.
+
+The usefulness of the IDVT lies in its the general nature. As seen in aforementioned paper, the IDVT can be used in various points of comparison and contexts, whether Object Based or linear; as long as the data being used contains the minimum data points.
+
+## Future Development of IDVT
 
 - Add simple slider to toggle time on plots generated by `action_item` and `click_density`. More info [here](https://plot.ly/python/sliders/)
 - Make scripts more efficient for larger datasets
