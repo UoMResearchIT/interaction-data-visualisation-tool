@@ -298,5 +298,3 @@ The "compare data on hover" option in the Plotly toolbar is useful if want to se
 Each plot can be downloaded as a HTML by clicking the 'Download .... as HTML' button, or as PNG by clicking the camera icon that is part of the Plotly toolbar.
 
 A CSV of Table of Stats can be downloaded via the 'Download as CSV' button.  
-
-## License
