@@ -47,7 +47,13 @@ of clicks, as well as summary statistics such as total number of clicks, average
 
  ### Clone Repo
 
- `git clone https://github.com/UoMResearchIT/bbc_data_flask_app.git`
+**BBC** -
+
+ `git clone https://github.com/bbc/interaction-data-visualisation-tool.git`
+
+**University of Manchester** -
+
+ `git clone https://github.com/UoMResearchIT/interaction-data-visualisation-tool.git`
 
  ### Install Packages
 
