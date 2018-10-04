@@ -23,7 +23,7 @@ I created a web based data visualisation tool for the initial analysis of low le
 
 The original goal was to create visualisations from interaction data from
 [CAKE](https://www.bbc.co.uk/taster/pilots/cook-along-kitchen-experience)
-(Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over that time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
+(Cook-Along Kitchen Experience). An OBM (Object Based Media) experience from the BBC. Over time the potential was seen in a generalised tool that could be used for future experiences to speed up the reading of audience behaviour.
 
 
 Initial visualisations were done using [R](https://www.r-project.org/) and the [tidyverse](https://www.tidyverse.org/) package. R is a language designed for statistical computing and data visualisation so it was quick and easy to use for pre processing the data and for initial analysis.
