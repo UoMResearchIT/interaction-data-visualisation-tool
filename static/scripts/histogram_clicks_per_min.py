@@ -31,7 +31,7 @@ layout = go.Layout(
 )
 
 # Rename plot
-filename = sys.argv[2] + 'histogram_clicks_per_minute.html'
+filename = sys.argv[2] + '_histogram_clicks_per_minute.html'
 
 # Sets filepath for plot to be saved to
 file_path = 'static/output//' + sys.argv[2] + '/stats//' + filename
