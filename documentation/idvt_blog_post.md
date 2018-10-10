@@ -22,8 +22,8 @@ Initially bespoke scripts were wriiten to take a look at the data. Even though t
 were published in two papers (see notes), writing and re-writing scripts soon became tiresome,
 especially when making small changes to parameters. The usefiulness of a tool that 
 could automate the process by allowing the user to change the parameters for themselves as well
- as interact with the plots, soon became apparent. if it was generelised, the tool cool 
- be re-used in otherprojects that require the
+as interact with the plots, soon became apparent. if it was generelised, the tool cool 
+be re-used in otherprojects that require the
 analysis of click data.
 
 That's what the Interaction Data Visualisation Tool (IDVT) does all of this. It's a web tool
