@@ -73,7 +73,7 @@ The scripts create five interactive, colour visualisations and a summary statist
 
 These data points were chosen as they are fairly broad and allow for comparisons to be made between behaviour of users, the frequency and type of button clicks. The summary statistics allow for futhur analysis to be made if needed. This means that the IDVT's users can ask an array of questions of the data.
 
-The addition of colour in the first 
+The addition of colour in the first few data visualisations makes it easier 
 
 Each plot can be easily shared. Interactive plots can be dwonloaded as a HTML file and then opened in browser, negating the need to download additional software or dependicies. As its pure HTML it can be inserted into webpages, and used in presentations. A static copy can be downlaoded as a PNG file by clicking the camera icon in the toolbar, allowing the plots to be used in situatiions when interactivity isn't needed such as a scientific paper.
 
@@ -101,10 +101,6 @@ As mentioned earlier, the click data was messy and difficult to gain meaningful 
 Running the same data, split by user who had the OBM experience and those who had the static experience through IDVT outputs the same results but in a more interactive form.
 
 [comment] I assume some figs of the CAKE Data can be put here. Perhaps compaing the OBM and static data sets? or having both on the same visualisation? to show how it can read click data from different sources?
-
-
-
-
 
 ## Future Use / Applications
 
