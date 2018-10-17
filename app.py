@@ -1,4 +1,5 @@
 import os
+import shutil
 from flask import Flask, request, redirect, url_for, send_file, render_template
 from werkzeug.utils import secure_filename
 
@@ -53,15 +54,24 @@ def run_vis():
 
     # make a main directory to store output from scripts
     split_filename = os.path.splitext(file_name)[0]
-    main_directory = r'static/output/' + split_filename
-    os.makedirs(main_directory)
+    input_directory = r'static/input/' + split_filename
+    os.makedirs(input_directory)
+
+    # move raw data to input folder
+    shutil.move(input_filepath, input_directory)
+    new_input_directory = input_directory + '//' + file_name
+
+    # make a main directory to store output from scripts
+    split_filename = os.path.splitext(file_name)[0]
+    output_directory = r'static/output/' + split_filename
+    os.makedirs(output_directory)
 
     # make click data directory
-    click_directory = main_directory + '/click_plots'
+    click_directory = output_directory + '/click_plots'
     os.makedirs(click_directory)
 
     # make stats data directory
-    stats_directory = main_directory + '/stats'
+    stats_directory = output_directory + '/stats'
     os.makedirs(stats_directory)
 
     # name and path for the stats csv file
@@ -70,14 +80,13 @@ def run_vis():
 
     # name and filepath of processed copy of input file 
     copy_input = split_filename + '_copy.csv'
-    copy_input_filepath = 'static/input/' + copy_input
-    print('copt_input ' + '' + copy_input)
+    copy_input_filepath = input_directory + '/' + copy_input
 
     # RUN SCRIPTS
 
     # pre process the data. checks that data has the correct columns necessary to create the plots,
     # histograms and stats data
-    os.system("python static/scripts/data_pre_pro.py " + input_filepath + ' ' + copy_input_filepath
+    os.system("python static/scripts/data_pre_pro.py " + new_input_directory + ' ' + copy_input_filepath
 )
 
     # create click plots
