@@ -54,11 +54,11 @@ if not {'time_diff', 'participant_id', 'action_item'}.issubset(bbc_data.columns)
     bbc_data['time_diff'] = bbc_data['time_diff'].astype(int)
 
     # save new dataframe to input filepath. It uses same name so will overwrite uploaded file
-    bbc_data.to_csv(sys.argv[1])
+    bbc_data.to_csv(sys.argv[2])
 
 else:
     # even if has columsn will turn 'time_diff' to numeric
     pd.to_numeric(bbc_data['time_diff'])
 
     # saves file to input filepath.
-    bbc_data.to_csv(sys.argv[1])
+    bbc_data.to_csv(sys.argv[2])

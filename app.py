@@ -68,18 +68,24 @@ def run_vis():
     csv_name = split_filename + '_stats.csv'
     csv_path = stats_directory + '/' + csv_name
 
+    # name and filepath of processed copy of input file 
+    copy_input = split_filename + '_copy.csv'
+    copy_input_filepath = 'static/input/' + copy_input
+    print('copt_input ' + '' + copy_input)
+
     # RUN SCRIPTS
 
     # pre process the data. checks that data has the correct columns necessary to create the plots,
     # histograms and stats data
-    os.system("python static/scripts/data_pre_pro.py " + input_filepath)
+    os.system("python static/scripts/data_pre_pro.py " + input_filepath + ' ' + copy_input_filepath
+)
 
     # create click plots
-    os.system("python static/scripts/action_item.py " + input_filepath + ' ' + split_filename)
-    os.system("python static/scripts/click_density.py " + input_filepath + ' ' + split_filename)
+    os.system("python static/scripts/action_item.py " + copy_input_filepath + ' ' + split_filename)
+    os.system("python static/scripts/click_density.py " + copy_input_filepath + ' ' + split_filename)
 
     # create the stats file and histograms
-    os.system("python static/scripts/create_stats.py " + input_filepath + ' ' + split_filename + ' ' + stats_directory)
+    os.system("python static/scripts/create_stats.py " + copy_input_filepath + ' ' + split_filename + ' ' + stats_directory)
     os.system("python static/scripts/histogram_click_count.py " + csv_path + ' ' + split_filename)
     os.system("python static/scripts/histogram_clicks_per_min.py " + csv_path + ' ' + split_filename)
     os.system("python static/scripts/histogram_time_taken.py " + csv_path + ' ' + split_filename)
