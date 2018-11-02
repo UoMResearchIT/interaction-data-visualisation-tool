@@ -143,6 +143,54 @@ and appended to a list that will create a 'min_time' column. The 'time-diff' col
 
 When the pre processing is complete the file is saved as a copy of the original data.
 
+### Plot creatiion - action_item.py, click_density.py, 
+
+#### action_item.py
+
+The 'action_item.py' script will create the 'Click Type" plot using an offline version of the Plotly framework. It displays the a tiemline for each particpant, with a coloured dot representing the type of click, ('action_item'). 
+
+The pre-processed data is read, and the necessary columns used, 'participant_id', 'action_item' and 'time_diff'.
+
+The 'time_diff' column is converted to minutes for readability. Furthur development of the program would have an option to keep this as seconds if the clicks are happening on a microsecond level.
+
+The data points are assigned, 'time_diff' on the x axis and, 'participant_id' on the y; text on hovering over the point, as well as grouping is assigned to 'action_item'. The grouping allows the plot to be filtered by each unique 'action_item'.
+
+The type of plot is 'scattergl', which means that WebGL is used to load and render the plots. This allows for smoother performance, espcially with large datasets.
+
+The title and x, y axis are generically labelled. The outputted HTML is named after the dataset appended with '_action_item.html', and is saved into the output and template folders. The output folder saves it on the server, where it can be downloaded if the user wishes to do so and the templates folder is how the plot is served to the webpage using Flask templating. This is done to give more flexibility in layout of the webpage and to cut down on load times.  
+
+#### click_density.py
+
+The 'Click Density' plot displays the density of clicks for each user in five minute intervals. It can show at what stage users were interacting the most.
+
+Using the processed data, the number of unique participants, and their total number clicks are found.
+
+Then, for each participant, the total time taken is worked out, using that the total number of five minute intervals is found. From this the number of clicks are totatlled within each five minute interval. These can then be fed into an individual 'trace' or line graph, each particpants trace is added to the plot.
+
+The plot is saved in the output and template folders to be downloaded by users and to be served to the webpage.
+
+### Stat Creation - create_stats.py 
+
+The summary statistics are necessary for click count, time taken and clicks per minute histograms.
+
+The statistics are created using the processed data as it needs access to the 'time_diff' column.
+
+First the processed data is double checked for values that will throw off the calculation of the statistics such as infinite and NAN values.
+
+Each user is then split up, and then the number of clicks are counted, and the time taken is calculated by taking the last value in the 'time_diff' column. Clicks per min/sec are worked out by diviidng the click count by the tim etaken, and the Min/secs per click is calculated by dividing the mins/secs by the total time.
+
+A new dataframe is created using the new statistics, and then is saved as CSV file in the output folder, as well as a HTML copy in the template to be served to the results page, and an additional CSV is stored in the templates to be downloaded.
+
+
+### Histogram Creation - histogram_click_count.py, histogram_clicks_per_min.py
+histogram_time_taken.py
+
+The three histograms are created in the same way. First, the summary statistics are read then the necessary statistic ('click_count', 'clicks_per_min' and 'time_taken') for each histogram is pulled from the data and plotted using Plotly.
+
+The bin size is set to automatic, Plotly does this by choosing a 'nice' bin size. It can be set manually, but for the purposes of generalising the tool, it has been set to automatic. Allowing the user to manually set the bin size is a discussed in the Future Development section.
+
+
+
 
 
 
