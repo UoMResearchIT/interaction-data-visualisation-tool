@@ -120,3 +120,29 @@ The usefulness of the IDVT lies in its the general nature. It can be used in var
 
 * [1] "Identifying Latent Indicators of Technical Difficulties from Interaction Data" -  Jonathan Carlton, Joshua Woodcock, Andy J Brown, John Keane, Caroline Jay
 * [2] Using Low-Level Interaction Data to Explore User Behaviour in Interactive-Media Experiences - Jonathan Carlton, Andy J Brown, Caroline Jay, John Keane 
+
+
+### How the Scripts Work
+
+This section goes over each script and describes how it works and why it is relevant to the IDVT.
+
+### Pre Processing - data_pre_pro.py
+
+For the click data to work with IDVT it needs to be pre=processed. This makes sure that the data is formatted correctly for the scripts that will create the plots. It will also get rid of data that has been recorded incorrectly.
+
+First the the inf (infinite), and NAN (Not a number) are dropped. This scrubs the data of values that would stop the visualisation scripts from running.
+
+Next, if the click doesn't have the 'time_diff', or 'action_item' columns, it will create them using the data available. 
+
+'time_diff' is essential for the running of the visualisation scripts as it is the time differences between the click and the beginning of the participants "session". This allows a timeline to be created in the "Click Type". Additionally it will help work out the click density in the "Click Density' plot by working out which clicks occured in each five minute interval relative to the begining of the users session.
+
+To work out the 'time_diff' column the data is sorted by unique 'participant_id'. The 'timestamp' column is sorted in ascending order and the the first timestamp value is created
+and appended to a list that will create a 'min_time' column. The 'time-diff' column is created by looping over each click of each participant and subtracting that participants 'min_time' from the click's 'timestamp'.
+
+'action_item' is created by concantonating the 'action' and 'item' columns. 'action_item' is used in the 'Click Type" plot. It provides context to the button click by providing us with a better idea of what each click does, by telling us what the participant has clicked on ('item") and what the result of the click was, e.g. play, pause.
+
+When the pre processing is complete the file is saved as a copy of the original data.
+
+
+
+
