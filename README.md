@@ -125,7 +125,9 @@ $ flask run
 
 ## External Deployment
 
-This section will run through deploying the app on a Ubuntu Virtual Machine. For other option refer to [Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
+This section will run through deploying the app on a Ubuntu Virtual Machine. For other options refer to [Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
+
+These instruction use the deployment version of this repository.
 
 #### Install Requirements
 
