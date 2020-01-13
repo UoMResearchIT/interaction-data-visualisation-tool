@@ -6,12 +6,12 @@ import plotly.graph_objs as go
 import sys
 
 # Gets the first sys arg from app.py. Tells script where the input file is.
-bbc_data = pd.read_csv(sys.argv[1])
+idvt_data = pd.read_csv(sys.argv[1])
 
 # Place columns in variables
-time_diff = bbc_data['time_diff'] / 60 # Divide by 60 for mins as its more readable than seconds.
-participant_id = bbc_data['participant_id']
-action_item = bbc_data['action_item']
+time_diff = idvt_data['time_diff'] / 60 # Divide by 60 for mins as its more readable than seconds.
+participant_id = idvt_data['participant_id']
+action_item = idvt_data['action_item']
 
 # DATA to be plotted
 

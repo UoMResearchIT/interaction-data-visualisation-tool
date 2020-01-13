@@ -110,7 +110,7 @@ def run_vis():
 # Download action_item plot
 @app.route('/dl_click', methods=['GET'])
 def run_dl_click():
-    return send_file('templates//bbc_data_action_item.html',
+    return send_file('templates//idvt_data_action_item.html',
                      mimetype='text/html',
                      as_attachment=True)
 
@@ -118,45 +118,45 @@ def run_dl_click():
 # Download click density plot
 @app.route('/dl_click_density')
 def run_dl_click_density():
-    return send_file('templates//bbc_data_click_density.html',
+    return send_file('templates//idvt_data_click_density.html',
                      mimetype='text/html',
-                     attachment_filename='bbc_data_click_density.html',
+                     attachment_filename='idvt_data_click_density.html',
                      as_attachment=True)
 
 
 # Download Click Count Histogram
 @app.route('/dl_click_count_html')
 def run_dl_click_count():
-    return send_file('templates//bbc_data_histogram_click_count.html',
+    return send_file('templates//idvt_data_histogram_click_count.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_click_count.html',
+                     attachment_filename='idvt_data_histogram_click_count.html',
                      as_attachment=True)
 
 
 # Download Clicks Per Min Histogram
 @app.route('/dl_clicks_per_minute_html')
 def run_dl_clicks_per_minute():
-    return send_file('templates//bbc_data_histogram_clicks_per_minute.html',
+    return send_file('templates//idvt_data_histogram_clicks_per_minute.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_clicks_per_minute.html',
+                     attachment_filename='idvt_data_histogram_clicks_per_minute.html',
                      as_attachment=True)
 
 
 # Download Time Taken Histogram
 @app.route('/dl_time_taken_html')
 def run_dl_time_taken():
-    return send_file('templates//bbc_data_histogram_time_taken_mins.html',
+    return send_file('templates//idvt_data_histogram_time_taken_mins.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_time_taken_mins.html',
+                     attachment_filename='idvt_data_histogram_time_taken_mins.html',
                      as_attachment=True)
 
 
 # Download the stats data as a CSV
 @app.route('/dl_stats_csv')
 def run_dl_stats_csv():
-    return send_file('templates//bbc_data_stats.csv',
+    return send_file('templates//idvt_data_stats.csv',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_stats.csv',
+                     attachment_filename='idvt_data_stats.csv',
                      as_attachment=True)
 
 
