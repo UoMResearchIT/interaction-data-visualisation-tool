@@ -1,6 +1,7 @@
 .idea
-static/input/*
-static/output/*
+.vscode
 venv
-documentation
 __pycache__
+.Rproj.user
+documentation
+templates/idvt_*

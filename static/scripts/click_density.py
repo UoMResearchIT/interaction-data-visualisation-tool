@@ -9,10 +9,10 @@ import math
 import sys
 
 # Gets the first sys arg from app.py. Tells script where the input file is.
-bbc_data = pd.read_csv(sys.argv[1])
+idvt_data = pd.read_csv(sys.argv[1])
 
 # Find number of unique sessions, and the number of clicks in each session
-session_unique, session_count = np.unique(bbc_data['participant_id'], return_counts=True)
+session_unique, session_count = np.unique(idvt_data['participant_id'], return_counts=True)
 
 # Lists for the necessary to data to be put into
 all_interval_list = []
@@ -28,7 +28,7 @@ for f in session_unique:
     interval = 300
 
     # Create data frame with just that participant
-    df = bbc_data.loc[bbc_data.participant_id == f, :]
+    df = idvt_data.loc[idvt_data.participant_id == f, :]
 
     # Find total  time taken
     time_taken = df['time_diff'].iloc[-1]
@@ -106,7 +106,7 @@ filename = sys.argv[2] + '_click_density.html'
 file_path = 'static/output//' + sys.argv[2] + '/click_plots//' + filename
 
 # TEMPLATE - Plot saved in template folder to be displayed on web
-offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//bbc_data_click_density.html',
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//idvt_data_click_density.html',
              auto_open=False)
 
 # STATIC - PLot saved in static to be retrieved later

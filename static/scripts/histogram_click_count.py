@@ -37,7 +37,7 @@ filename = sys.argv[2] + '_histogram_click_count.html'
 file_path = 'static/output//' + sys.argv[2] + '/stats//' + filename
 
 # TEMPLATE - Plot saved in template folder to be displayed on web
-offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//bbc_data_histogram_click_count.html'
+offline.plot({'data': data, 'layout': layout}, validate=False, filename='templates//idvt_data_histogram_click_count.html'
              , auto_open=False)
 
 # STATIC - Plot saved in static to be retrieved later

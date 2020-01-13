@@ -1,4 +1,5 @@
 import os
+import shutil
 from flask import Flask, request, redirect, url_for, send_file, render_template
 from werkzeug.utils import secure_filename
 
@@ -53,33 +54,47 @@ def run_vis():
 
     # make a main directory to store output from scripts
     split_filename = os.path.splitext(file_name)[0]
-    main_directory = r'static/output/' + split_filename
-    os.makedirs(main_directory)
+    input_directory = r'static/input/' + split_filename
+    os.makedirs(input_directory)
+
+    # move raw data to input folder
+    shutil.move(input_filepath, input_directory)
+    new_input_directory = input_directory + '//' + file_name
+
+    # make a main directory to store output from scripts
+    split_filename = os.path.splitext(file_name)[0]
+    output_directory = r'static/output/' + split_filename
+    os.makedirs(output_directory)
 
     # make click data directory
-    click_directory = main_directory + '/click_plots'
+    click_directory = output_directory + '/click_plots'
     os.makedirs(click_directory)
 
     # make stats data directory
-    stats_directory = main_directory + '/stats'
+    stats_directory = output_directory + '/stats'
     os.makedirs(stats_directory)
 
     # name and path for the stats csv file
     csv_name = split_filename + '_stats.csv'
     csv_path = stats_directory + '/' + csv_name
 
+    # name and filepath of processed copy of input file 
+    copy_input = split_filename + '_copy.csv'
+    copy_input_filepath = input_directory + '/' + copy_input
+
     # RUN SCRIPTS
 
     # pre process the data. checks that data has the correct columns necessary to create the plots,
     # histograms and stats data
-    os.system("python static/scripts/data_pre_pro.py " + input_filepath)
+    os.system("python static/scripts/data_pre_pro.py " + new_input_directory + ' ' + copy_input_filepath
+)
 
     # create click plots
-    os.system("python static/scripts/action_item.py " + input_filepath + ' ' + split_filename)
-    os.system("python static/scripts/click_density.py " + input_filepath + ' ' + split_filename)
+    os.system("python static/scripts/action_item.py " + copy_input_filepath + ' ' + split_filename)
+    os.system("python static/scripts/click_density.py " + copy_input_filepath + ' ' + split_filename)
 
     # create the stats file and histograms
-    os.system("python static/scripts/create_stats.py " + input_filepath + ' ' + split_filename + ' ' + stats_directory)
+    os.system("python static/scripts/create_stats.py " + copy_input_filepath + ' ' + split_filename + ' ' + stats_directory)
     os.system("python static/scripts/histogram_click_count.py " + csv_path + ' ' + split_filename)
     os.system("python static/scripts/histogram_clicks_per_min.py " + csv_path + ' ' + split_filename)
     os.system("python static/scripts/histogram_time_taken.py " + csv_path + ' ' + split_filename)
@@ -95,7 +110,7 @@ def run_vis():
 # Download action_item plot
 @app.route('/dl_click', methods=['GET'])
 def run_dl_click():
-    return send_file('templates//bbc_data_action_item.html',
+    return send_file('templates//idvt_data_action_item.html',
                      mimetype='text/html',
                      as_attachment=True)
 
@@ -103,45 +118,45 @@ def run_dl_click():
 # Download click density plot
 @app.route('/dl_click_density')
 def run_dl_click_density():
-    return send_file('templates//bbc_data_click_density.html',
+    return send_file('templates//idvt_data_click_density.html',
                      mimetype='text/html',
-                     attachment_filename='bbc_data_click_density.html',
+                     attachment_filename='idvt_data_click_density.html',
                      as_attachment=True)
 
 
 # Download Click Count Histogram
 @app.route('/dl_click_count_html')
 def run_dl_click_count():
-    return send_file('templates//bbc_data_histogram_click_count.html',
+    return send_file('templates//idvt_data_histogram_click_count.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_click_count.html',
+                     attachment_filename='idvt_data_histogram_click_count.html',
                      as_attachment=True)
 
 
 # Download Clicks Per Min Histogram
 @app.route('/dl_clicks_per_minute_html')
 def run_dl_clicks_per_minute():
-    return send_file('templates//bbc_data_histogram_clicks_per_minute.html',
+    return send_file('templates//idvt_data_histogram_clicks_per_minute.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_clicks_per_minute.html',
+                     attachment_filename='idvt_data_histogram_clicks_per_minute.html',
                      as_attachment=True)
 
 
 # Download Time Taken Histogram
 @app.route('/dl_time_taken_html')
 def run_dl_time_taken():
-    return send_file('templates//bbc_data_histogram_time_taken_mins.html',
+    return send_file('templates//idvt_data_histogram_time_taken_mins.html',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_histogram_time_taken_mins.html',
+                     attachment_filename='idvt_data_histogram_time_taken_mins.html',
                      as_attachment=True)
 
 
 # Download the stats data as a CSV
 @app.route('/dl_stats_csv')
 def run_dl_stats_csv():
-    return send_file('templates//bbc_data_stats.csv',
+    return send_file('templates//idvt_data_stats.csv',
                      mimetype='text/csv',
-                     attachment_filename='bbc_data_stats.csv',
+                     attachment_filename='idvt_data_stats.csv',
                      as_attachment=True)
 
 
