@@ -2,4 +2,5 @@
 static/input/*
 static/output/*
 venv
+documentation
 __pycache__
