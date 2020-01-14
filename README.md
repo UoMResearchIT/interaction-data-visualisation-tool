@@ -281,4 +281,7 @@ $ sudo supervisorctl update
 $ sudo supervisorctl start interaction-data-visualisation-tool
 ```
 
-  
+
+## Acknowledgements 
+
+This work was supported by BBC Research and Development under the Data Science Research Partnership programme.
