@@ -6,9 +6,11 @@ analysis of low level interaction data taken from object based user experiences.
 The IDVT takes the data and creates a set of plots that visualise the type and density
 of clicks, as well as summary statistics such as total number of clicks, average number of clicks per second and total time taken.
 
+This work was supported by BBC Research and Development under the Data Science Research Partnership programme.
+
 ## Usage
 
-The Web App is designed to take a CSV file with comma separated values as input then runs Python scripts that will output various visualisations.
+The Web App is designed to take a CSV file with comma separated values as input then runs Python scripts that will output various visualizations.
 
 ### Essential Columns
 
@@ -125,7 +127,9 @@ $ flask run
 
 ## External Deployment
 
-This section will run through deploying the app on a Ubuntu Virtual Machine. For other option refer to [Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
+This section will run through deploying the app on a Ubuntu Virtual Machine. For other options refer to [Flask Documentation ](http://flask.pocoo.org/docs/1.0/deploying/)
+
+These instruction use the deployment version of this repository.
 
 #### Install Requirements
 
